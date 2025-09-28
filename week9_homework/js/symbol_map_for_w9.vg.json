@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australian Bushfire Impact 2019-2020",
+    "subtitle": "Fire intensity and detection frequency across affected regions",
+    "fontSize": 16,
+    "anchor": "start"
+  },
+  "width": 800,
+  "height": 500,
+  "projection": {
+    "type": "naturalEarth1",
+    "center": [133, -28],
+    "scale": 800
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/your-repo/data/aumap.topojson",
+        "format": {"type": "topojson", "feature": "states"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/your-repo/data/bushfire_intensity_grid.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "tooltip": {"content": "data"},
+        "stroke": "white",
+        "strokeWidth": 0.3,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "fire_count",
+          "type": "quantitative",
+          "title": "Fire Detections",
+          "scale": {
+            "type": "sqrt",
+            "domain": [1, 50],
+            "range": [20, 300]
+          },
+          "legend": {
+            "values": [1, 5, 10, 25, 50],
+            "symbolType": "circle"
+          }
+        },
+        "color": {
+          "field": "fire_intensity_score",
+          "type": "quantitative",
+          "title": "Fire Intensity Score",
+          "scale": {
+            "scheme": "orangered",
+            "domain": [0, 100]
+          },
+          "legend": {
+            "gradientLength": 200,
+            "gradientThickness": 15
+          }
+        }
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "color": "independent",
+      "size": "independent"
+    }
+  }
+}
