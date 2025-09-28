@@ -79,12 +79,11 @@
           "type": "quantitative",
           "title": "Fire Intensity Score",
           "scale": {
-            "scheme": "redyellowgreen",
+            "scheme": "orangered",
             "type": "log",
             "base": 10,
-            "domain": [0.1, 30],
-            "clamp": true,
-            "reverse": true
+            "domain": [3, 30],
+            "clamp": true
           },
           "legend": {
             "gradientLength": 200,
