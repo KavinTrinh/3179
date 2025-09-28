@@ -41,7 +41,7 @@
           "filter": "datum.fire_intensity_score > 3"
         },
         {
-          "calculate": "datum.fire_count < 10 ? '< 10' : datum.fire_count < 50 ? '10-49' : datum.fire_count < 100 ? '50-99' : datum.fire_count < 1000 ? '100-999' : '≥ 1000'",
+          "calculate": "datum.fire_count < 5 ? '< 5' : datum.fire_count < 15 ? '5-14' : datum.fire_count < 50 ? '15-49' : datum.fire_count < 100 ? '50-99' : '≥ 100'",
           "as": "fire_count_category"
         }
       ],
@@ -66,13 +66,12 @@
           "type": "ordinal",
           "title": "Fire Detections",
           "scale": {
-            "domain": ["< 10", "10-49", "50-99", "100-999", "≥ 1000"],
-            "range": [45, 75, 120, 180, 255]
+            "domain": ["< 5", "5-14", "15-49", "50-99", "≥ 100"],
+            "range": [30, 90, 270, 810, 2430]
           },
           "legend": {
             "symbolType": "circle",
-            "values": ["< 10", "10-49", "50-99", "100-999", "≥ 1000"]
-            
+            "values": ["< 5", "5-14", "15-49", "50-99", "≥ 100"]
           }
         },
         "color": {
