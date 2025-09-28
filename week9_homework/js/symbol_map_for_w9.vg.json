@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "Australian Bushfire Impact 2019-2020 (Filtered)",
-    "subtitle": "High-intensity fire detection frequency across affected regions (intensity > 10)",
+    "subtitle": "High-intensity fire detection frequency across affected regions (intensity > 3)",
     "fontSize": 16,
     "anchor": "start"
   },
