@@ -1,35 +1,50 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Australian Bushfire Impact 2019-2020",
-    "subtitle": "Fire intensity and detection frequency across affected regions",
+    "text": "Australian Bushfire Impact 2019-2020 (Filtered)",
+    "subtitle": "High-intensity fire detection frequency across affected regions (intensity > 10)",
     "fontSize": 16,
     "anchor": "start"
   },
   "width": 800,
   "height": 500,
   "projection": {
-    "type": "naturalEarth1",
+    "type": "equirectangular",
     "center": [133, -28],
     "scale": 800
   },
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/your-repo/data/aumap.topojson",
-        "format": {"type": "topojson", "feature": "states"}
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "SA4_2016_AUST"}
       },
       "mark": {
         "type": "geoshape",
         "fill": "#f0f0f0",
-        "stroke": "white",
-        "strokeWidth": 0.5
+        "stroke": "darkgrey"
       }
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/your-repo/data/bushfire_intensity_grid.csv"
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "ne_50m_graticules_30"}
       },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/data/bushfire_intensity_grid.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.fire_intensity_score > 3"
+        },
+        {
+          "calculate": "datum.fire_count < 10 ? '< 10' : datum.fire_count < 50 ? '10-49' : datum.fire_count < 100 ? '50-99' : datum.fire_count < 1000 ? '100-999' : '≥ 1000'",
+          "as": "fire_count_category"
+        }
+      ],
       "mark": {
         "type": "circle",
         "tooltip": {"content": "data"},
@@ -47,17 +62,17 @@
           "type": "quantitative"
         },
         "size": {
-          "field": "fire_count",
-          "type": "quantitative",
+          "field": "fire_count_category",
+          "type": "ordinal",
           "title": "Fire Detections",
           "scale": {
-            "type": "sqrt",
-            "domain": [1, 50],
-            "range": [20, 300]
+            "domain": ["< 10", "10-49", "50-99", "100-999", "≥ 1000"],
+            "range": [45, 75, 120, 180, 255]
           },
           "legend": {
-            "values": [1, 5, 10, 25, 50],
-            "symbolType": "circle"
+            "symbolType": "circle",
+            "values": ["< 10", "10-49", "50-99", "100-999", "≥ 1000"]
+            
           }
         },
         "color": {
@@ -65,21 +80,44 @@
           "type": "quantitative",
           "title": "Fire Intensity Score",
           "scale": {
-            "scheme": "orangered",
-            "domain": [0, 100]
+            "scheme": "redyellowgreen",
+            "type": "log",
+            "base": 10,
+            "domain": [0.1, 30],
+            "clamp": true,
+            "reverse": true
           },
           "legend": {
             "gradientLength": 200,
-            "gradientThickness": 15
+            "gradientThickness": 15,
+            "tickCount": 6
           }
         }
       }
+    },
+    {
+      "data": {
+        "values": [
+          {"state": "WA", "longitude": 122, "latitude": -26},
+          {"state": "NT", "longitude": 133, "latitude": -20},
+          {"state": "QLD", "longitude": 145, "latitude": -22},
+          {"state": "SA", "longitude": 135, "latitude": -30},
+          {"state": "NSW", "longitude": 147, "latitude": -32},
+          {"state": "VIC", "longitude": 144, "latitude": -37},
+          {"state": "TAS", "longitude": 147, "latitude": -42}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "darkslategray"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "state", "type": "nominal"}
+      }
     }
-  ],
-  "resolve": {
-    "scale": {
-      "color": "independent",
-      "size": "independent"
-    }
-  }
+  ]
 }
