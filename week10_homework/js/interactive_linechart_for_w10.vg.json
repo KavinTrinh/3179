@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+   "title": {
+    "text": "Total fire count over time by intensity score (with interactive filtering)",
+    "fontSize": 16,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/data/bushfire_intensity_grid.csv"
+  },
+  "width": 600,
+  "height": 350,
+  "params": [
+    {
+      "name": "intensity_threshold",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "name": "Minimum Intensity Score: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "toDate(datum.acq_datetime_min)",
+      "as": "datetime"
+    },
+    {
+      "filter": "datum.fire_intensity_score >= intensity_threshold"
+    },
+    {
+      "bin": {"step": 5, "extent": [0, 30]},
+      "field": "fire_intensity_score",
+      "as": "Intensity"
+    }
+  ],
+  "layer": [
+    {
+      "mark": "area",
+      "params": [
+        {
+          "name": "legend_selection",
+          "select": {"type": "point", "fields": ["Intensity"]},
+          "bind": "legend"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "datetime",
+          "timeUnit": "yearmonth",
+          "axis": {"title": "Time", "tickCount": 5, "grid": false}
+        },
+        "y": {
+          "aggregate": "sum",
+          "field": "fire_count",
+          "title": "Total Fire Count"
+        },
+        "color": {
+          "field": "Intensity",
+          "type": "ordinal",
+          "scale": {
+            "range": ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c"]
+          },
+          "legend": {
+            "title": "Fire Intensity Score"
+          }
+        },
+        "opacity": {
+          "condition": {"param": "legend_selection", "value": 1},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "datetime", "timeUnit": "yearmonth", "title": "Date"},
+          {"field": "Intensity", "title": "Intensity Range"},
+          {"aggregate": "sum", "field": "fire_count", "title": "Total Fires"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -10,
+        "fontSize": 11,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020, "month": "jan"}},
+        "y": {"datum": 100},
+        "text": {"value": "Peak of 2019-2020 Bushfire Season"},
+        "color": {"value": "#bd0026"}
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 4],
+        "size": 2
+      },
+      "encoding": {
+        "x": {"datum": {"year": 2020, "month": "jan"}},
+        "color": {"value": "#bd0026"}
+      }
+    }
+  ],
+  "config": {
+    "area": {"interpolate": "monotone"}
+  }
+}

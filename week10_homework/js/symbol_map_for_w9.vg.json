@@ -1,0 +1,134 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australian Bushfire Impact 2019-2020 (Filtered)",
+    "subtitle": "High-intensity fire detection frequency across affected regions (intensity > 3)",
+    "fontSize": 16,
+    "anchor": "start"
+  },
+  "width": 800,
+  "height": 500,
+  "projection": {
+    "type": "equirectangular",
+    "center": [133, -28],
+    "scale": 800
+  },
+  "params": [
+    {
+      "name": "min_intensity",
+      "value": 3,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 10,
+        "step": 0.5,
+        "name": "Fire Intensity: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "SA4_2016_AUST"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "darkgrey"
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "ne_50m_graticules_30"}
+      },
+      "mark": {"type": "geoshape", "fill": null, "stroke": "lightgray"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/week9_homework/data/bushfire_intensity_grid.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.fire_intensity_score > min_intensity"
+        },
+        {
+          "calculate": "datum.fire_count < 5 ? '< 5' : datum.fire_count < 15 ? '5-14' : datum.fire_count < 50 ? '15-49' : datum.fire_count < 100 ? '50-99' : '≥ 100'",
+          "as": "fire_count_category"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "tooltip": {"content": "data"},
+        "stroke": "white",
+        "strokeWidth": 0.3,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "fire_count_category",
+          "type": "ordinal",
+          "title": "Fire Detections",
+          "scale": {
+            "domain": ["< 5", "5-14", "15-49", "50-99", "≥ 100"],
+            "range": [30, 90, 270, 810, 2430]
+          },
+          "legend": {
+            "symbolType": "circle",
+            "values": ["< 5", "5-14", "15-49", "50-99", "≥ 100"]
+          }
+        },
+        "color": {
+          "field": "fire_intensity_score",
+          "type": "quantitative",
+          "title": "Fire Intensity Score",
+          "scale": {
+            "scheme": "orangered",
+            "type": "log",
+            "base": 10,
+            "domain": [1, 30],
+            "clamp": true
+          },
+          "legend": {
+            "gradientLength": 200,
+            "gradientThickness": 15,
+            "tickCount": 6
+          }
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"state": "WA", "longitude": 122, "latitude": -26},
+          {"state": "NT", "longitude": 133, "latitude": -20},
+          {"state": "QLD", "longitude": 145, "latitude": -22},
+          {"state": "SA", "longitude": 135, "latitude": -30},
+          {"state": "NSW", "longitude": 147, "latitude": -32},
+          {"state": "VIC", "longitude": 144, "latitude": -37},
+          {"state": "TAS", "longitude": 147, "latitude": -42}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": "bold",
+        "color": "darkslategray"
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "state", "type": "nominal"}
+      }
+    }
+  ]
+}
