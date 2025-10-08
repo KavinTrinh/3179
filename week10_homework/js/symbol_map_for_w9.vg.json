@@ -6,8 +6,9 @@
     "fontSize": 16,
     "anchor": "start"
   },
-  "width": 800,
-  "height": 500,
+  "width": "container", 
+  "autosize": {"type": "fit"},
+  "height": 600,
   "projection": {
     "type": "equirectangular",
     "center": [133, -28],

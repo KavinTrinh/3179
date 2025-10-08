@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <title>Australia Bushfire Analysis</title>
+  
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
   
-  
-  <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-  
 </head>
 <body>
-  
-<div id="symbol_map"></div>
 
-<script type="text/javascript">
+  <h1>Australia Bushfire Dashboard</h1>
 
-  var spec2 = "js/interactive_linechart_for_w10.vg.json";
-  vegaEmbed('#symbol_map', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+  <div id="vis1" class="chart-container"></div>
+
+  <div id="vis2" class="chart-container"></div>
+
+
+  <script type="text/javascript">
+    var spec1 = "js/symbol_map_for_w9.vg.json";
+    var spec2 = "js/interactive_chart_for_w10.vg.json";
+
+    // Embed visualizations
+    vegaEmbed('#vis1', spec1, { "actions": false });
+    vegaEmbed('#vis2', spec2, { "actions": false });
+  </script>
 
 </body>
 </html>
