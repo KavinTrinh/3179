@@ -104,7 +104,16 @@
             "gradientThickness": 15,
             "tickCount": 6
           }
-        }
+        },
+        "tooltip": [
+            {"field": "fire_intensity_score", "type": "quantitative", "title": "Fire Intensity", "format": ".2f"},
+            {"field": "fire_count", "type": "quantitative", "title": "Detections"},
+            {"field": "avg_frp", "type": "quantitative", "title": "Avg. FRP", "format": ".2f"},
+            {"field": "max_frp", "type": "quantitative", "title": "Max. FRP", "format": ".2f"},
+            {"field": "avg_brightness", "type": "quantitative", "title": "Avg. Brightness (K)", "format": ".1f"},
+            {"field": "acq_datetime_min", "type": "temporal", "title": "First Detected", "format": "%Y-%m-%d %H:%M"},
+            {"field": "acq_datetime_max", "type": "temporal", "title": "Last Detected", "format": "%Y-%m-%d %H:%M"}
+        ]
       }
     },
     {
