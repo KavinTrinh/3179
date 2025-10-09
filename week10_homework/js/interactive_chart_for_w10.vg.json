@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   
-   "title": {
+  "title": {
     "text": "Total fire count over time by intensity score (with interactive filtering)",
     "fontSize": 16,
     "anchor": "start"
@@ -83,28 +83,30 @@
     },
     {
       "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 5,
-        "dy": -10,
-        "fontSize": 11,
-        "fontStyle": "italic"
+        "type": "rule",
+        "strokeDash": [8, 4],
+        "size": 2,
+        "color": "#d62728"
       },
       "encoding": {
-        "x": {"datum": {"year": 2020, "month": "jan"}},
-        "y": {"datum": 100},
-        "text": {"value": "Peak of 2019-2020 Bushfire Season"},
-        "color": {"value": "#bd0026"}
+        "y": {"datum": 50000}
       }
     },
     {
       "mark": {
-        "type": "rule",
-        "strokeDash": [4, 4],
-        "size": 2
+        "type": "text",
+        "align": "left",
+        "dx": 5,
+        "dy": -8,
+        "fontSize": 13,
+        "fontWeight": "normal",
+        "color": "#d62728",
+        "baseline": "middle"
       },
       "encoding": {
-        "x": {"datum": {"year": 2020, "month": "jan"}}
+        "x": {"value": 0},
+        "y": {"datum": 50000},
+        "text": {"value": "Critical threshold: 50,000 fires"}
       }
     }
   ],
