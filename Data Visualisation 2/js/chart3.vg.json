@@ -1,0 +1,141 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australia's Emissions Journey vs Major Economies",
+    "subtitle": "CO2 emissions comparison 1970-2020 - Use the bottom chart to zoom",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_gdp_bubble_chart_data.csv"
+  },
+  "vconcat": [
+    {
+      "width": 800,
+      "height": 400,
+      "transform": [
+        {
+          "filter": "datum.Code == 'AUS' || datum.Code == 'USA' || datum.Code == 'CHN' || datum.Code == 'IND' || datum.Code == 'DEU' || datum.Code == 'GBR' || datum.Code == 'JPN' || datum.Code == 'CAN'"
+        },
+        {
+          "calculate": "datum.Annual_CO2_emissions / 1000000000",
+          "as": "Emissions_Billions"
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "point": false,
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "scale": {"domain": {"param": "time_brush"}},
+          "axis": {
+            "title": "",
+            "tickCount": 10,
+            "grid": false,
+            "format": "d"
+          }
+        },
+        "y": {
+          "field": "Emissions_Billions",
+          "type": "quantitative",
+          "title": "CO2 Emissions (Billion tons)",
+          "axis": {"grid": true}
+        },
+        "color": {
+          "field": "Entity",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Australia", "United States", "China", "India", "Germany", "United Kingdom", "Japan", "Canada"],
+            "range": ["#000000", "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#a65628", "#f781bf"]
+          },
+          "legend": {"title": "Country"}
+        },
+        "strokeWidth": {
+          "condition": {
+            "test": "datum.Code == 'AUS'",
+            "value": 4
+          },
+          "value": 2
+        },
+        "opacity": {
+          "condition": {
+            "test": "datum.Code == 'AUS'",
+            "value": 1
+          },
+          "value": 0.7
+        },
+        "tooltip": [
+          {"field": "Year", "type": "quantitative", "title": "Year"},
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {
+            "field": "Emissions_Billions",
+            "type": "quantitative",
+            "title": "Emissions (Billion tons)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_per_capita",
+            "type": "quantitative",
+            "title": "Per Capita (tons)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "width": 800,
+      "height": 80,
+      "transform": [
+        {
+          "aggregate": [
+            {"op": "sum", "field": "Annual_CO2_emissions", "as": "Total"}
+          ],
+          "groupby": ["Year"]
+        },
+        {
+          "calculate": "datum.Total / 1000000000",
+          "as": "Emissions_Billions"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "color": "#ccc",
+        "opacity": 0.6
+      },
+      "params": [
+        {
+          "name": "time_brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "axis": {
+            "title": "Drag to select time range",
+            "format": "d"
+          }
+        },
+        "y": {
+          "field": "Emissions_Billions",
+          "type": "quantitative",
+          "axis": {
+            "tickCount": 3,
+            "grid": false,
+            "title": "Global Total"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Arial"
+  }
+}

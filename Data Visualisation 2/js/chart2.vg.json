@@ -2,15 +2,15 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": "CO2 Emissions vs GDP (1970-2020)",
-    "subtitle": "Bubble size represents population | Australia highlighted",
+    "subtitle": "Bubble size represents population | Key countries labeled",
     "fontSize": 20,
     "subtitleFontSize": 14,
     "anchor": "start"
   },
-  "width": 700,
-  "height": 500,
+  "width": 800,
+  "height": 600,
   "data": {
-    "url": "data/co2_gdp_bubble_chart_data.csv"
+    "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_gdp_bubble_chart_data.csv"
   },
   "params": [
     {
@@ -25,66 +25,167 @@
       }
     },
     {
-      "name": "Continent_filter",
+      "name": "Continent_selection",
       "bind": {
         "input": "select",
-        "options": [null, "Asia", "Europe", "Africa", "North America", "South America", "Oceania"],
-        "labels": ["All Continents", "Asia", "Europe", "Africa", "North America", "South America", "Oceania"],
-        "name": "Continent: "
+        "options": [
+          null,
+          "Asia",
+          "Europe",
+          "Africa",
+          "North America",
+          "South America",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "Asia",
+          "Europe",
+          "Africa",
+          "North America",
+          "South America",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    },
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,
+        "step": 1000000,
+        "name": "Minimum Population: "
       }
     }
   ],
   "transform": [
     {"filter": "datum.Year == Year_selection"},
-    {"filter": "Continent_filter == null || datum.Continent == Continent_filter"}
+    {"filter": "datum.Annual_CO2_emissions >= 1000000"},
+    {"filter": "datum.GDP_USD >= 1000000000"},
+    {"filter": "datum.Population > Population_Above"},
+    {
+      "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+    },
+    {
+      "calculate": "datum.GDP_USD / 1000000000",
+      "as": "GDP_Billions"
+    },
+    {
+      "calculate": "datum.Annual_CO2_emissions / 1000000",
+      "as": "CO2_Millions"
+    }
   ],
+  "encoding": {
+    "x": {
+      "field": "GDP_Billions",
+      "type": "quantitative",
+      "title": "GDP (Billion USD)",
+      "scale": {
+        "type": "log",
+        "domain": [1, 30000]
+      },
+      "axis": {
+        "tickCount": 5,
+        "values": [1, 10, 100, 1000, 10000],
+        "grid": true,
+        "gridOpacity": 0.3
+      }
+    },
+    "y": {
+      "field": "CO2_Millions",
+      "type": "quantitative",
+      "title": "Annual CO2 Emissions (Million tons)",
+      "scale": {
+        "type": "log",
+        "domain": [1, 15000]
+      },
+      "axis": {
+        "tickCount": 5,
+        "values": [1, 10, 100, 1000, 10000],
+        "grid": true,
+        "gridOpacity": 0.3
+      }
+    }
+  },
   "layer": [
     {
       "mark": {
         "type": "circle",
-        "opacity": 0.7,
-        "stroke": "#fff",
-        "strokeWidth": 1
+        "opacity": 0.6
       },
       "encoding": {
-        "x": {
-          "field": "GDP_USD",
-          "type": "quantitative",
-          "scale": {"type": "log"},
-          "axis": {"title": "GDP (USD)", "format": "~s", "grid": true}
-        },
-        "y": {
-          "field": "Annual_CO2_emissions",
-          "type": "quantitative",
-          "scale": {"type": "log"},
-          "axis": {"title": "CO2 Emissions (tons)", "format": "~s", "grid": true}
-        },
         "size": {
           "field": "Population",
           "type": "quantitative",
           "scale": {
-            "type": "sqrt",
-            "range": [50, 3000]
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
           },
-          "legend": {"title": "Population", "format": "~s"}
+          "legend": {
+            "title": "Population",
+            "format": ".1s"
+          }
         },
         "color": {
           "field": "Continent",
           "type": "nominal",
           "scale": {
-            "domain": ["Asia", "Europe", "Africa", "North America", "South America", "Oceania"],
-            "range": ["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#a65628"]
+            "domain": [
+              "Asia",
+              "Europe",
+              "Africa",
+              "North America",
+              "South America",
+              "Oceania"
+            ],
+            "range": [
+              "#e41a1c",
+              "#377eb8",
+              "#4daf4a",
+              "#984ea3",
+              "#ff7f00",
+              "#a65628"
+            ]
           },
           "legend": {"title": "Continent"}
         },
         "tooltip": [
           {"field": "Entity", "type": "nominal", "title": "Country"},
           {"field": "Year", "type": "quantitative", "title": "Year"},
-          {"field": "GDP_USD", "type": "quantitative", "title": "GDP (USD)", "format": ",.0f"},
-          {"field": "GDP_per_capita_USD", "type": "quantitative", "title": "GDP per Capita", "format": ",.0f"},
-          {"field": "Annual_CO2_emissions", "type": "quantitative", "title": "Total CO2 (tons)", "format": ",.0f"},
-          {"field": "CO2_per_capita", "type": "quantitative", "title": "CO2 per Capita (tons)", "format": ".2f"},
-          {"field": "Population", "type": "quantitative", "title": "Population", "format": ",.0f"},
+          {
+            "field": "GDP_Billions",
+            "type": "quantitative",
+            "title": "GDP (Billion USD)",
+            "format": ",.2f"
+          },
+          {
+            "field": "GDP_per_capita_USD",
+            "type": "quantitative",
+            "title": "GDP per Capita (USD)",
+            "format": ",.0f"
+          },
+          {
+            "field": "CO2_Millions",
+            "type": "quantitative",
+            "title": "CO2 Emissions (Million tons)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_per_capita",
+            "type": "quantitative",
+            "title": "CO2 per Capita (tons)",
+            "format": ".2f"
+          },
+          {
+            "field": "Population",
+            "type": "quantitative",
+            "title": "Population",
+            "format": ",.0f"
+          },
           {"field": "Continent", "type": "nominal", "title": "Continent"}
         ]
       }
@@ -93,26 +194,94 @@
       "mark": {
         "type": "circle",
         "stroke": "#000",
-        "strokeWidth": 3,
+        "strokeWidth": 2,
         "fill": null
       },
       "transform": [
         {"filter": "datum.Code == 'AUS'"}
       ],
       "encoding": {
-        "x": {"field": "GDP_USD", "type": "quantitative"},
-        "y": {"field": "Annual_CO2_emissions", "type": "quantitative"},
-        "size": {"field": "Population", "type": "quantitative"},
+        "size": {
+          "field": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
+          },
+          "legend": null
+        },
         "tooltip": [
           {"field": "Entity", "type": "nominal", "title": "Country"},
           {"field": "Year", "type": "quantitative", "title": "Year"},
-          {"field": "GDP_USD", "type": "quantitative", "title": "GDP (USD)", "format": ",.0f"},
-          {"field": "Annual_CO2_emissions", "type": "quantitative", "title": "Total CO2 (tons)", "format": ",.0f"}
+          {
+            "field": "GDP_Billions",
+            "type": "quantitative",
+            "title": "GDP (Billion USD)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_Millions",
+            "type": "quantitative",
+            "title": "CO2 Emissions (Million tons)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_per_capita",
+            "type": "quantitative",
+            "title": "CO2 per Capita (tons)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {"field": "Entity", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Code'] == 'AUS' || datum['Code'] == 'USA' || datum['Code'] == 'CHN' || datum['Code'] == 'IND' || datum['Code'] == 'DEU' || datum['Code'] == 'JPN' || datum['Code'] == 'GBR'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {"field": "Year", "type": "quantitative", "title": "Year"},
+          {
+            "field": "GDP_Billions",
+            "type": "quantitative",
+            "title": "GDP (Billion USD)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_Millions",
+            "type": "quantitative",
+            "title": "CO2 Emissions (Million tons)",
+            "format": ",.2f"
+          },
+          {
+            "field": "CO2_per_capita",
+            "type": "quantitative",
+            "title": "CO2 per Capita (tons)",
+            "format": ".2f"
+          }
         ]
       }
     }
   ],
   "config": {
-    "view": {"stroke": null}
+    "view": {"stroke": null},
+    "font": "Arial"
   }
 }
