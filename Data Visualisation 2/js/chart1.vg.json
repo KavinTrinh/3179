@@ -23,7 +23,7 @@
           "lookup": "properties.ADM0_A3",
           "from": {
             "data": {
-              "url": "data/co2_emissions_per_capita_2022.csv"
+              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_emissions_per_capita_2022.csv"
             },
             "key": "Code",
             "fields": ["Entity", "Emissions_per_Capita", "Annual CO₂ emissions", "2022 Population", "Continent", "Growth Rate"]
@@ -57,7 +57,7 @@
             "format": ".2f"
           },
           {
-            "field": "Annual CO₂ emissions",
+            "field": "Annual CO2 emissions",
             "type": "quantitative",
             "title": "Total Emissions (tons)",
             "format": ",.0f"
