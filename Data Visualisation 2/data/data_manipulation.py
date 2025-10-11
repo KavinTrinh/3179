@@ -1,8 +1,7 @@
 import pandas as pd
 
-# Read the datasets
-co2_data = pd.read_csv('annual-co2-emissions-per-country.csv')
-population_data = pd.read_csv('world_population.csv')
+co2_data = pd.read_csv(r'C:\Users\Khanh\OneDrive - z55rs\Documents\Monash\SEM2 2025\FIT3179\A2\3179\Data Visualisation 2\data\annual-co2-emissions-per-country.csv')
+population_data = pd.read_csv(r'C:\Users\Khanh\OneDrive - z55rs\Documents\Monash\SEM2 2025\FIT3179\A2\3179\Data Visualisation 2\data\world_population.csv')
 
 # Filter CO2 data for 2022 only (or latest year available)
 co2_2022 = co2_data[co2_data['Year'] == 2022].copy()
@@ -17,14 +16,14 @@ merged_data = pd.merge(
 )
 
 # Calculate emissions per capita
-merged_data['Emissions_per_Capita'] = merged_data['Annual CO₂ emissions'] / merged_data['2022 Population']
+merged_data['Emissions_per_Capita'] = merged_data['Annual CO2 emissions'] / merged_data['2022 Population']
 
 # Select only the columns we need for the map
 final_data = merged_data[[
     'Entity',
     'Code',
     'Year',
-    'Annual CO₂ emissions',
+    'Annual CO2 emissions',
     'Country/Territory',
     '2022 Population',
     'Continent',

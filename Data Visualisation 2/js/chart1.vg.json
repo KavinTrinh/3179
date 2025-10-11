@@ -15,7 +15,7 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/ne_110m_admin_0_countries.topojson",
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       "transform": [
@@ -23,28 +23,11 @@
           "lookup": "properties.ADM0_A3",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Data Visualisation 2/data/annual-co2-emissions-per-country.csv"
+              "url": "data/co2_emissions_per_capita_2022.csv"
             },
             "key": "Code",
-            "fields": ["Annual CO2 emissions", "Year", "Entity"]
+            "fields": ["Entity", "Emissions_per_Capita", "Annual CO₂ emissions", "2022 Population", "Continent", "Growth Rate"]
           }
-        },
-        {
-          "filter": "datum.Year == 2022"
-        },
-        {
-          "lookup": "properties.ADM0_A3",
-          "from": {
-            "data": {
-              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/world_population.csv"
-            },
-            "key": "CCA3",
-            "fields": ["2022 Population", "Continent", "Growth Rate", "Country/Territory"]
-          }
-        },
-        {
-          "calculate": "datum['Annual CO₂ emissions'] / datum['2022 Population']",
-          "as": "Emissions_per_Capita"
         }
       ],
       "mark": {"type": "geoshape", "stroke": "#fff", "strokeWidth": 0.5},
@@ -95,7 +78,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/ne_110m_admin_0_countries.topojson",
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
         "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
       },
       "transform": [
@@ -117,7 +100,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/WorldMapWithGraticules.topojson",
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/WorldMapWithGraticules.topojson",
         "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
       },
       "mark": {"type": "geoshape", "fill": null, "stroke": "#ddd", "strokeWidth": 0.5}
