@@ -11,7 +11,57 @@
   },
   "width": 800,
   "height": 450,
-  "projection": {"type": "equalEarth"},
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2022,
+      "bind": {
+        "input": "select",
+        "options": [1970, 1980, 1990, 2000, 2010, 2015, 2020, 2022],
+        "name": "Year: "
+      }
+    },
+    {
+      "name": "zoom_level",
+      "value": 150,
+      "bind": {
+        "input": "range",
+        "min": 150,
+        "max": 1000,
+        "step": 10,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [0, 0],
+      "bind": {
+        "input": "select",
+        "options": [
+          [0, 0],
+          [133, -27],
+          [-95, 37],
+          [10, 50],
+          [105, 35],
+          [25, 0]
+        ],
+        "labels": [
+          "World",
+          "Australia",
+          "North America",
+          "Europe",
+          "Asia",
+          "Africa"
+        ],
+        "name": "Map Centre: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "equalEarth",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
+  },
   "layer": [
     {
       "data": {
@@ -23,7 +73,7 @@
           "lookup": "properties.ADM0_A3",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_emissions_per_capita_2022.csv"
+              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_emissions_per_capita_timeseries.csv"
             },
             "key": "Code",
             "fields": ["Entity", "Emissions_per_Capita", "Annual CO2 emissions", "2022 Population", "Continent", "Growth Rate"]

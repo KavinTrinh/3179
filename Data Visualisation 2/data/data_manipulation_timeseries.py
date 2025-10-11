@@ -24,7 +24,7 @@ for year in years:
     merged = pd.merge(
         co2_year,
         population_data[['CCA3', 'Country/Territory', 'Continent', pop_col]],
-        left_on='Code',
+     ''   left_on='Code',
         right_on='CCA3',
         how='inner'
     )
