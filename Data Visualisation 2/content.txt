@@ -1,0 +1,53 @@
+Opening: Set the Global Stage
+Chart 1: Choropleth World Map - CO2 Emissions per Capita (2023)
+
+Why first? Immediate visual impact, shows the big picture
+Narrative hook: "Australia stands out in red/orange among developed nations"
+Sets up the question: "Why is Australia's footprint so large?"
+
+Section Title: "The Global Carbon Landscape: Where Does Australia Stand?"
+
+Chart 2: Scatter Plot - CO2 Emissions vs GDP (Global comparison with Australia highlighted)
+
+Why second? Answers the "why" - connects emissions to economic structure
+Narrative progression: "It's not just about being developed - it's about HOW we've developed"
+Reveals: Australia's emission intensity relative to economic peers
+
+Section Title: "Economic Growth vs Environmental Cost"
+
+Chart 4: Multi-Line Chart - Emissions Over Time (Australia vs Selected Countries vs Global Average)
+
+Why third? Shows whether we're improving or falling behind
+Narrative tension: "While others reduce, what's Australia doing?"
+Provides context: Historical trends, policy impacts, comparisons to peers
+
+Section Title: "Two Decades of Progress: Australia vs The World"
+
+
+Chart 3: Choropleth Map - Australian States/Territories Emissions (2023)
+
+Why fourth? Natural transition from global/temporal to local/spatial
+Narrative shift: "Now let's look within Australia - who's contributing?"
+Makes it personal: Viewers see their own state
+Sets up: The sectoral analysis that follows
+
+Section Title: "Inside Australia: A Nation Divided by Carbon"
+
+
+Chart 5: Emissions by Sector (2023)
+
+Why fifth? After seeing WHERE (states), now show WHAT (sectors)
+Narrative explanation: "Here's what's driving those state emissions"
+Critical insight: Which sectors need addressing
+Can link back: "Remember Queensland's high emissions? Here's why - coal-based electricity"
+
+Section Title: "Breaking Down the Sources: Where Our Emissions Come From"
+
+Chart 5: Emissions by Sector (2023)
+
+Why fifth? After seeing WHERE (states), now show WHAT (sectors)
+Narrative explanation: "Here's what's driving those state emissions"
+Critical insight: Which sectors need addressing
+Can link back: "Remember Queensland's high emissions? Here's why - coal-based electricity"
+
+Section Title: "Breaking Down the Sources: Where Our Emissions Come From"
