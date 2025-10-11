@@ -26,7 +26,7 @@
               "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_emissions_per_capita_2022.csv"
             },
             "key": "Code",
-            "fields": ["Entity", "Emissions_per_Capita", "Annual CO₂ emissions", "2022 Population", "Continent", "Growth Rate"]
+            "fields": ["Entity", "Emissions_per_Capita", "Annual CO2 emissions", "2022 Population", "Continent", "Growth Rate"]
           }
         }
       ],
