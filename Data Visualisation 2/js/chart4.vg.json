@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Australia's Carbon Journey: State-by-State Evolution",
-    "subtitle": "Three decades of emissions change across Australian states (1990-2023)",
+    "text": "Australia's Carbon Journey: State Emissions Over Time",
+    "subtitle": "Total emissions by state (1990-2023) - Circle size represents emission levels",
     "fontSize": 20,
     "subtitleFontSize": 14,
     "anchor": "start"
@@ -25,9 +25,21 @@
   "projection": {
     "type": "equirectangular",
     "center": [133, -28],
-    "scale": 700
+    "scale": 800
   },
   "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "SA4_2016_AUST"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f0f0",
+        "stroke": "darkgrey",
+        "strokeWidth": 0.5
+      }
+    },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Emissions%20by%20state%20and%20territory.csv"
@@ -52,28 +64,47 @@
           "as": "State"
         },
         {
-          "calculate": "datum.State == 'ACT' ? 'Australian Capital Territory' : datum.State == 'NSW' ? 'New South Wales' : datum.State == 'NT' ? 'Northern Territory' : datum.State == 'QLD' ? 'Queensland' : datum.State == 'SA' ? 'South Australia' : datum.State == 'TAS' ? 'Tasmania' : datum.State == 'VIC' ? 'Victoria' : datum.State == 'WA' ? 'Western Australia' : datum.State",
-          "as": "State_Full_Name"
-        },
-        {
-          "lookup": "State_Full_Name",
+          "lookup": "State",
           "from": {
             "data": {
-              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
-              "format": {"type": "topojson", "feature": "aumap"}
+              "values": [
+                {"State": "ACT", "longitude": 149.1, "latitude": -35.3, "Full_Name": "Australian Capital Territory"},
+                {"State": "NSW", "longitude": 147, "latitude": -32, "Full_Name": "New South Wales"},
+                {"State": "NT", "longitude": 133, "latitude": -20, "Full_Name": "Northern Territory"},
+                {"State": "QLD", "longitude": 145, "latitude": -22, "Full_Name": "Queensland"},
+                {"State": "SA", "longitude": 135, "latitude": -30, "Full_Name": "South Australia"},
+                {"State": "TAS", "longitude": 147, "latitude": -42, "Full_Name": "Tasmania"},
+                {"State": "VIC", "longitude": 144, "latitude": -37, "Full_Name": "Victoria"},
+                {"State": "WA", "longitude": 122, "latitude": -26, "Full_Name": "Western Australia"}
+              ]
             },
-            "key": "properties.STATE_NAME"
-          },
-          "as": "geo"
+            "key": "State",
+            "fields": ["longitude", "latitude", "Full_Name"]
+          }
         }
       ],
       "mark": {
-        "type": "geoshape",
+        "type": "circle",
+        "opacity": 0.7,
         "stroke": "white",
-        "strokeWidth": 1.5
+        "strokeWidth": 2
       },
       "encoding": {
-        "shape": {"field": "geo", "type": "geojson"},
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "Emissions",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [5, 25, 50, 100, 150],
+            "range": [100, 500, 1500, 3000, 5000]
+          },
+          "legend": {
+            "title": "Emissions (Mt CO2)",
+            "orient": "bottom-right"
+          }
+        },
         "color": {
           "field": "Emissions",
           "type": "quantitative",
@@ -82,34 +113,69 @@
             "domain": [5, 25, 50, 100, 150],
             "scheme": "orangered"
           },
-          "legend": {
-            "title": "Emissions (Mt CO2)",
-            "orient": "bottom-right",
-            "direction": "horizontal"
-          }
+          "legend": null
         },
         "tooltip": [
-          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Full_Name", "type": "nominal", "title": "State"},
           {"field": "Financial Year", "type": "quantitative", "title": "Year"},
-          {
-            "field": "Emissions",
-            "type": "quantitative",
-            "title": "Total Emissions (Mt)",
-            "format": ".2f"
-          }
+          {"field": "Emissions", "type": "quantitative", "title": "Emissions (Mt)", "format": ".2f"}
         ]
       }
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
-        "format": {"type": "topojson", "feature": "aumap"}
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Emissions%20by%20state%20and%20territory.csv"
       },
+      "transform": [
+        {"filter": "datum['Financial Year'] == Year_selection"},
+        {
+          "fold": [
+            "ACT (Mt)",
+            "NSW (Mt)",
+            "NT (Mt)",
+            "QLD (Mt)",
+            "SA (Mt)",
+            "TAS (Mt)",
+            "VIC (Mt)",
+            "WA (Mt)"
+          ],
+          "as": ["State_Raw", "Emissions"]
+        },
+        {
+          "calculate": "replace(datum.State_Raw, ' (Mt)', '')",
+          "as": "State"
+        },
+        {
+          "lookup": "State",
+          "from": {
+            "data": {
+              "values": [
+                {"State": "ACT", "longitude": 149.1, "latitude": -35.3},
+                {"State": "NSW", "longitude": 147, "latitude": -32},
+                {"State": "NT", "longitude": 133, "latitude": -20},
+                {"State": "QLD", "longitude": 145, "latitude": -22},
+                {"State": "SA", "longitude": 135, "latitude": -30},
+                {"State": "TAS", "longitude": 147, "latitude": -42},
+                {"State": "VIC", "longitude": 144, "latitude": -37},
+                {"State": "WA", "longitude": 122, "latitude": -26}
+              ]
+            },
+            "key": "State",
+            "fields": ["longitude", "latitude"]
+          }
+        }
+      ],
       "mark": {
-        "type": "geoshape",
-        "fill": null,
-        "stroke": "#666",
-        "strokeWidth": 0.5
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "dy": -20
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "State", "type": "nominal"},
+        "color": {"value": "black"}
       }
     }
   ],
