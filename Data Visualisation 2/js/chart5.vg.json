@@ -16,20 +16,52 @@
       "height": 400,
       "transform": [
         {
+          "calculate": "replace(datum.Electricity, '%', '')",
+          "as": "Electricity_Clean"
+        },
+        {
+          "calculate": "replace(datum['Stationary energy excluding electricity'], '%', '')",
+          "as": "Stationary_Clean"
+        },
+        {
+          "calculate": "replace(datum.Transport, '%', '')",
+          "as": "Transport_Clean"
+        },
+        {
+          "calculate": "replace(datum['Fugitive emissions'], '%', '')",
+          "as": "Fugitive_Clean"
+        },
+        {
+          "calculate": "replace(datum['Industrial processes and product use'], '%', '')",
+          "as": "Industrial_Clean"
+        },
+        {
+          "calculate": "replace(datum.Agriculture, '%', '')",
+          "as": "Agriculture_Clean"
+        },
+        {
+          "calculate": "replace(datum.Waste, '%', '')",
+          "as": "Waste_Clean"
+        },
+        {
           "fold": [
-            "Electricity",
-            "Stationary energy excluding electricity",
-            "Transport",
-            "Fugitive emissions",
-            "Industrial processes and product use",
-            "Agriculture",
-            "Waste"
+            "Electricity_Clean",
+            "Stationary_Clean",
+            "Transport_Clean",
+            "Fugitive_Clean",
+            "Industrial_Clean",
+            "Agriculture_Clean",
+            "Waste_Clean"
           ],
           "as": ["Sector", "Percentage_Change"]
         },
         {
-          "calculate": "datum.Percentage_Change * 100",
+          "calculate": "toNumber(datum.Percentage_Change)",
           "as": "Percentage_Change_Value"
+        },
+        {
+          "calculate": "datum.Sector == 'Electricity_Clean' ? 'Electricity' : datum.Sector == 'Stationary_Clean' ? 'Stationary energy excluding electricity' : datum.Sector == 'Transport_Clean' ? 'Transport' : datum.Sector == 'Fugitive_Clean' ? 'Fugitive emissions' : datum.Sector == 'Industrial_Clean' ? 'Industrial processes and product use' : datum.Sector == 'Agriculture_Clean' ? 'Agriculture' : 'Waste'",
+          "as": "Sector_Name"
         }
       ],
       "layer": [
@@ -61,7 +93,7 @@
               }
             },
             "color": {
-              "field": "Sector",
+              "field": "Sector_Name",
               "type": "nominal",
               "scale": {
                 "domain": [
@@ -91,7 +123,7 @@
             },
             "tooltip": [
               {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
-              {"field": "Sector", "type": "nominal", "title": "Sector"},
+              {"field": "Sector_Name", "type": "nominal", "title": "Sector"},
               {
                 "field": "Percentage_Change_Value",
                 "type": "quantitative",
@@ -119,26 +151,54 @@
       "height": 80,
       "transform": [
         {
+          "calculate": "replace(datum.Electricity, '%', '')",
+          "as": "Electricity_Clean"
+        },
+        {
+          "calculate": "replace(datum['Stationary energy excluding electricity'], '%', '')",
+          "as": "Stationary_Clean"
+        },
+        {
+          "calculate": "replace(datum.Transport, '%', '')",
+          "as": "Transport_Clean"
+        },
+        {
+          "calculate": "replace(datum['Fugitive emissions'], '%', '')",
+          "as": "Fugitive_Clean"
+        },
+        {
+          "calculate": "replace(datum['Industrial processes and product use'], '%', '')",
+          "as": "Industrial_Clean"
+        },
+        {
+          "calculate": "replace(datum.Agriculture, '%', '')",
+          "as": "Agriculture_Clean"
+        },
+        {
+          "calculate": "replace(datum.Waste, '%', '')",
+          "as": "Waste_Clean"
+        },
+        {
           "fold": [
-            "Electricity",
-            "Stationary energy excluding electricity",
-            "Transport",
-            "Fugitive emissions",
-            "Industrial processes and product use",
-            "Agriculture",
-            "Waste"
+            "Electricity_Clean",
+            "Stationary_Clean",
+            "Transport_Clean",
+            "Fugitive_Clean",
+            "Industrial_Clean",
+            "Agriculture_Clean",
+            "Waste_Clean"
           ],
           "as": ["Sector", "Percentage_Change"]
         },
         {
-          "aggregate": [
-            {"op": "mean", "field": "Percentage_Change", "as": "Avg_Change"}
-          ],
-          "groupby": ["Year"]
+          "calculate": "toNumber(datum.Percentage_Change)",
+          "as": "Percentage_Value"
         },
         {
-          "calculate": "datum.Avg_Change * 100",
-          "as": "Avg_Change_Value"
+          "aggregate": [
+            {"op": "mean", "field": "Percentage_Value", "as": "Avg_Change"}
+          ],
+          "groupby": ["Year"]
         }
       ],
       "mark": {
@@ -163,7 +223,7 @@
           }
         },
         "y": {
-          "field": "Avg_Change_Value",
+          "field": "Avg_Change",
           "type": "quantitative",
           "axis": {
             "tickCount": 3,

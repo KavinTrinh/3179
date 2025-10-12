@@ -1,0 +1,52 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Progress or Stagnation? State Emissions Then and Now",
+    "subtitle": "Comparing 2005 vs 2023 emissions by state",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "anchor": "start"
+  },
+  "width": 700,
+  "height": 400,
+  "data": {
+    "url": "data/australia_state_emissions_long.csv"
+  },
+  "transform": [
+    {"filter": "datum['Financial Year'] == 2005 || datum['Financial Year'] == 2023"}
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {
+      "field": "State_Full_Name",
+      "type": "nominal",
+      "title": null,
+      "axis": {"labelAngle": 0}
+    },
+    "x": {
+      "field": "Emissions",
+      "type": "quantitative",
+      "title": "Emissions (Mt CO2)"
+    },
+    "color": {
+      "field": "Financial Year",
+      "type": "ordinal",
+      "scale": {
+        "domain": [2005, 2023],
+        "range": ["#bdbdbd", "#d62728"]
+      },
+      "legend": {"title": "Year"}
+    },
+    "xOffset": {"field": "Financial Year"},
+    "tooltip": [
+      {"field": "State_Full_Name", "type": "nominal", "title": "State"},
+      {"field": "Financial Year", "type": "ordinal", "title": "Year"},
+      {
+        "field": "Emissions",
+        "type": "quantitative",
+        "title": "Emissions (Mt)",
+        "format": ".1f"
+      }
+    ]
+  }
+}
