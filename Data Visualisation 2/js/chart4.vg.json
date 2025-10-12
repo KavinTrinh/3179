@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australia's Carbon Journey: State-by-State Evolution",
+    "subtitle": "Three decades of emissions change across Australian states (1990-2023)",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "anchor": "start"
+  },
+  "width": 800,
+  "height": 500,
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2023,
+      "bind": {
+        "input": "range",
+        "min": 1990,
+        "max": 2023,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular",
+    "center": [133, -28],
+    "scale": 700
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Emissions%20by%20state%20and%20territory.csv"
+      },
+      "transform": [
+        {"filter": "datum['Financial Year'] == Year_selection"},
+        {
+          "fold": [
+            "ACT (Mt)",
+            "NSW (Mt)",
+            "NT (Mt)",
+            "QLD (Mt)",
+            "SA (Mt)",
+            "TAS (Mt)",
+            "VIC (Mt)",
+            "WA (Mt)"
+          ],
+          "as": ["State_Raw", "Emissions"]
+        },
+        {
+          "calculate": "replace(datum.State_Raw, ' (Mt)', '')",
+          "as": "State"
+        },
+        {
+          "calculate": "datum.State == 'ACT' ? 'Australian Capital Territory' : datum.State == 'NSW' ? 'New South Wales' : datum.State == 'NT' ? 'Northern Territory' : datum.State == 'QLD' ? 'Queensland' : datum.State == 'SA' ? 'South Australia' : datum.State == 'TAS' ? 'Tasmania' : datum.State == 'VIC' ? 'Victoria' : datum.State == 'WA' ? 'Western Australia' : datum.State",
+          "as": "State_Full_Name"
+        },
+        {
+          "lookup": "State_Full_Name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
+              "format": {"type": "topojson", "feature": "aumap"}
+            },
+            "key": "properties.STATE_NAME"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "shape": {"field": "geo", "type": "geojson"},
+        "color": {
+          "field": "Emissions",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [5, 25, 50, 100, 150],
+            "scheme": "orangered"
+          },
+          "legend": {
+            "title": "Emissions (Mt CO2)",
+            "orient": "bottom-right",
+            "direction": "horizontal"
+          }
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Financial Year", "type": "quantitative", "title": "Year"},
+          {
+            "field": "Emissions",
+            "type": "quantitative",
+            "title": "Total Emissions (Mt)",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
+        "format": {"type": "topojson", "feature": "aumap"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "#666",
+        "strokeWidth": 0.5
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Arial"
+  }
+}
