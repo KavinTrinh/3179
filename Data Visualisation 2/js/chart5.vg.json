@@ -1,0 +1,181 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Breaking Down the Sources: Sectoral Emissions Trends",
+    "subtitle": "Percentage change in emissions by sector since 2005 - Use bottom chart to zoom",
+    "fontSize": 20,
+    "subtitleFontSize": 14,
+    "anchor": "start"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/sectoral_excluding_lulucf.csv"
+  },
+  "vconcat": [
+    {
+      "width": 800,
+      "height": 400,
+      "transform": [
+        {
+          "fold": [
+            "Electricity",
+            "Stationary energy excluding electricity",
+            "Transport",
+            "Fugitive emissions",
+            "Industrial processes and product use",
+            "Agriculture",
+            "Waste"
+          ],
+          "as": ["Sector", "Percentage_Change"]
+        },
+        {
+          "calculate": "datum.Percentage_Change * 100",
+          "as": "Percentage_Change_Value"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "line",
+            "point": false,
+            "strokeWidth": 3
+          },
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "temporal",
+              "scale": {"domain": {"param": "time_brush"}},
+              "axis": {
+                "title": "",
+                "tickCount": 10,
+                "grid": false,
+                "format": "%Y"
+              }
+            },
+            "y": {
+              "field": "Percentage_Change_Value",
+              "type": "quantitative",
+              "title": "Change Since 2005 (%)",
+              "axis": {
+                "grid": true,
+                "gridOpacity": 0.3
+              }
+            },
+            "color": {
+              "field": "Sector",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Electricity",
+                  "Transport",
+                  "Stationary energy excluding electricity",
+                  "Fugitive emissions",
+                  "Industrial processes and product use",
+                  "Agriculture",
+                  "Waste"
+                ],
+                "range": [
+                  "#d62728",
+                  "#ff7f0e",
+                  "#e377c2",
+                  "#8c564b",
+                  "#9467bd",
+                  "#2ca02c",
+                  "#bcbd22"
+                ]
+              },
+              "legend": {
+                "title": "Sector",
+                "orient": "right",
+                "labelLimit": 300
+              }
+            },
+            "tooltip": [
+              {"field": "Year", "type": "temporal", "title": "Year", "format": "%Y"},
+              {"field": "Sector", "type": "nominal", "title": "Sector"},
+              {
+                "field": "Percentage_Change_Value",
+                "type": "quantitative",
+                "title": "Change Since 2005 (%)",
+                "format": "+.1f"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [4, 4],
+            "strokeWidth": 2,
+            "color": "#666"
+          },
+          "encoding": {
+            "y": {"datum": 0}
+          }
+        }
+      ]
+    },
+    {
+      "width": 800,
+      "height": 80,
+      "transform": [
+        {
+          "fold": [
+            "Electricity",
+            "Stationary energy excluding electricity",
+            "Transport",
+            "Fugitive emissions",
+            "Industrial processes and product use",
+            "Agriculture",
+            "Waste"
+          ],
+          "as": ["Sector", "Percentage_Change"]
+        },
+        {
+          "aggregate": [
+            {"op": "mean", "field": "Percentage_Change", "as": "Avg_Change"}
+          ],
+          "groupby": ["Year"]
+        },
+        {
+          "calculate": "datum.Avg_Change * 100",
+          "as": "Avg_Change_Value"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "color": "#ccc",
+        "opacity": 0.6
+      },
+      "params": [
+        {
+          "name": "time_brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "temporal",
+          "axis": {
+            "title": "Drag to select time range",
+            "format": "%Y",
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "field": "Avg_Change_Value",
+          "type": "quantitative",
+          "axis": {
+            "tickCount": 3,
+            "grid": false,
+            "title": "Avg Change (%)"
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "font": "Arial"
+  }
+}
