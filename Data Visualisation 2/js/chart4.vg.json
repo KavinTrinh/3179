@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Australia's Carbon Journey: State Emissions Over Time",
-    "subtitle": "Total emissions by state (1990-2023) - Circle size represents emission levels",
+    "text": "Australia's Carbon Journey: State-by-State Evolution",
+    "subtitle": "Three decades of emissions change across Australian states (1990-2023)",
     "fontSize": 20,
     "subtitleFontSize": 14,
     "anchor": "start"
@@ -30,81 +30,30 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/aumap.topojson",
-        "format": {"type": "topojson", "feature": "SA4_2016_AUST"}
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": "#f0f0f0",
-        "stroke": "darkgrey",
-        "strokeWidth": 0.5
-      }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Emissions%20by%20state%20and%20territory.csv"
+        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/js/STE_2021_AUST.topojson",
+        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020"}
       },
       "transform": [
-        {"filter": "datum['Financial Year'] == Year_selection"},
         {
-          "fold": [
-            "ACT (Mt)",
-            "NSW (Mt)",
-            "NT (Mt)",
-            "QLD (Mt)",
-            "SA (Mt)",
-            "TAS (Mt)",
-            "VIC (Mt)",
-            "WA (Mt)"
-          ],
-          "as": ["State_Raw", "Emissions"]
-        },
-        {
-          "calculate": "replace(datum.State_Raw, ' (Mt)', '')",
-          "as": "State"
-        },
-        {
-          "lookup": "State",
+          "lookup": "properties.STE_NAME21",
           "from": {
             "data": {
-              "values": [
-                {"State": "ACT", "longitude": 149.1, "latitude": -35.3, "Full_Name": "Australian Capital Territory"},
-                {"State": "NSW", "longitude": 147, "latitude": -32, "Full_Name": "New South Wales"},
-                {"State": "NT", "longitude": 133, "latitude": -20, "Full_Name": "Northern Territory"},
-                {"State": "QLD", "longitude": 145, "latitude": -22, "Full_Name": "Queensland"},
-                {"State": "SA", "longitude": 135, "latitude": -30, "Full_Name": "South Australia"},
-                {"State": "TAS", "longitude": 147, "latitude": -42, "Full_Name": "Tasmania"},
-                {"State": "VIC", "longitude": 144, "latitude": -37, "Full_Name": "Victoria"},
-                {"State": "WA", "longitude": 122, "latitude": -26, "Full_Name": "Western Australia"}
-              ]
+              "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/australia_state_emissions_long.csv"
             },
-            "key": "State",
-            "fields": ["longitude", "latitude", "Full_Name"]
+            "key": "State_Full_Name",
+            "fields": ["Financial Year", "State_Code", "Emissions"]
           }
+        },
+        {
+          "filter": "datum['Financial Year'] == Year_selection"
         }
       ],
       "mark": {
-        "type": "circle",
-        "opacity": 0.7,
+        "type": "geoshape",
         "stroke": "white",
         "strokeWidth": 2
       },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "size": {
-          "field": "Emissions",
-          "type": "quantitative",
-          "scale": {
-            "type": "threshold",
-            "domain": [5, 25, 50, 100, 150],
-            "range": [100, 500, 1500, 3000, 5000]
-          },
-          "legend": {
-            "title": "Emissions (Mt CO2)",
-            "orient": "bottom-right"
-          }
-        },
         "color": {
           "field": "Emissions",
           "type": "quantitative",
@@ -113,69 +62,22 @@
             "domain": [5, 25, 50, 100, 150],
             "scheme": "orangered"
           },
-          "legend": null
+          "legend": {
+            "title": "Emissions (Mt CO2)",
+            "orient": "bottom-right",
+            "direction": "horizontal"
+          }
         },
         "tooltip": [
-          {"field": "Full_Name", "type": "nominal", "title": "State"},
+          {"field": "properties.STE_NAME21", "type": "nominal", "title": "State"},
           {"field": "Financial Year", "type": "quantitative", "title": "Year"},
-          {"field": "Emissions", "type": "quantitative", "title": "Emissions (Mt)", "format": ".2f"}
-        ]
-      }
-    },
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/Emissions%20by%20state%20and%20territory.csv"
-      },
-      "transform": [
-        {"filter": "datum['Financial Year'] == Year_selection"},
-        {
-          "fold": [
-            "ACT (Mt)",
-            "NSW (Mt)",
-            "NT (Mt)",
-            "QLD (Mt)",
-            "SA (Mt)",
-            "TAS (Mt)",
-            "VIC (Mt)",
-            "WA (Mt)"
-          ],
-          "as": ["State_Raw", "Emissions"]
-        },
-        {
-          "calculate": "replace(datum.State_Raw, ' (Mt)', '')",
-          "as": "State"
-        },
-        {
-          "lookup": "State",
-          "from": {
-            "data": {
-              "values": [
-                {"State": "ACT", "longitude": 149.1, "latitude": -35.3},
-                {"State": "NSW", "longitude": 147, "latitude": -32},
-                {"State": "NT", "longitude": 133, "latitude": -20},
-                {"State": "QLD", "longitude": 145, "latitude": -22},
-                {"State": "SA", "longitude": 135, "latitude": -30},
-                {"State": "TAS", "longitude": 147, "latitude": -42},
-                {"State": "VIC", "longitude": 144, "latitude": -37},
-                {"State": "WA", "longitude": 122, "latitude": -26}
-              ]
-            },
-            "key": "State",
-            "fields": ["longitude", "latitude"]
+          {
+            "field": "Emissions",
+            "type": "quantitative",
+            "title": "Total Emissions (Mt)",
+            "format": ".2f"
           }
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "fontSize": 12,
-        "fontWeight": "bold",
-        "dy": -20
-      },
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "State", "type": "nominal"},
-        "color": {"value": "black"}
+        ]
       }
     }
   ],
