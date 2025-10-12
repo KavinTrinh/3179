@@ -43,11 +43,9 @@ Can link back: "Remember Queensland's high emissions? Here's why - coal-based el
 
 Section Title: "Breaking Down the Sources: Where Our Emissions Come From"
 
-Chart 5: Emissions by Sector (2023)
+Chart 6: Grouped Bar Chart - Renewable Energy Installations by State (2023)
 
-Why fifth? After seeing WHERE (states), now show WHAT (sectors)
-Narrative explanation: "Here's what's driving those state emissions"
-Critical insight: Which sectors need addressing
-Can link back: "Remember Queensland's high emissions? Here's why - coal-based electricity"
-
-Section Title: "Breaking Down the Sources: Where Our Emissions Come From"
+Data: Clean Energy Regulator postcode data (aggregated to state level)
+Visualization: Grouped bars showing Solar, Wind, Hydro capacity by state
+Interaction: Link to Chart 3 - clicking a state highlights it on both charts
+Insight annotation: "SA leads in per capita renewable installations, driven by wind"
