@@ -21,13 +21,23 @@
         {
           "calculate": "datum.Annual_CO2_emissions / 1000000000",
           "as": "Emissions_Billions"
+        },
+        {
+          "filter": {"param": "country_selection"}
         }
       ],
       "mark": {
-        "type": "line",
-        "point": false,
-        "strokeWidth": 2
+        "type": "area",
+        "line": true,
+        "point": false
       },
+      "params": [
+        {
+          "name": "country_selection",
+          "select": {"type": "point", "fields": ["Entity"], "toggle": true},
+          "bind": "legend"
+        }
+      ],
       "encoding": {
         "x": {
           "field": "Year",
@@ -44,7 +54,8 @@
           "field": "Emissions_Billions",
           "type": "quantitative",
           "title": "CO2 Emissions (Billion tons)",
-          "axis": {"grid": true}
+          "axis": {"grid": true},
+          "stack": true
         },
         "color": {
           "field": "Entity",
@@ -53,20 +64,9 @@
             "domain": ["Australia", "United States", "China", "India", "Germany", "United Kingdom", "Japan", "Canada"],
             "range": ["#000000", "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#a65628", "#f781bf"]
           },
-          "legend": {"title": "Country"}
-        },
-        "strokeWidth": {
-          "condition": {
-            "test": "datum.Code == 'AUS'",
-            "value": 4
-          },
-          "value": 2
+          "legend": {"title": "Country (Click to select/deselect)"}
         },
         "opacity": {
-          "condition": {
-            "test": "datum.Code == 'AUS'",
-            "value": 1
-          },
           "value": 0.7
         },
         "tooltip": [
