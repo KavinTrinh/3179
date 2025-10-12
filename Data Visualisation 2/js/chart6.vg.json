@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
-    "text": "Progress or Stagnation? State Emissions Then and Now",
-    "subtitle": "Comparing 2005 vs 2023 emissions by state",
+    "text": "The Energy Transition: Fossil vs Renewable Generation",
+    "subtitle": "Electricity generation by source and state (2024)",
     "fontSize": 20,
     "subtitleFontSize": 14,
     "anchor": "start"
@@ -10,41 +10,53 @@
   "width": 700,
   "height": 400,
   "data": {
-    "url": "data/australia_state_emissions_long.csv"
+    "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/state_electricity_generation_2024.csv"
   },
   "transform": [
-    {"filter": "datum['Financial Year'] == 2005 || datum['Financial Year'] == 2023"}
+    {
+      "fold": ["Fossil_GWh", "Renewable_GWh"],
+      "as": ["Source", "Generation_GWh"]
+    }
   ],
   "mark": "bar",
   "encoding": {
     "y": {
-      "field": "State_Full_Name",
+      "field": "State",
       "type": "nominal",
       "title": null,
+      "sort": {"field": "Renewable_Percentage", "order": "descending"},
       "axis": {"labelAngle": 0}
     },
     "x": {
-      "field": "Emissions",
+      "field": "Generation_GWh",
       "type": "quantitative",
-      "title": "Emissions (Mt CO2)"
+      "title": "Electricity Generation (GWh)"
     },
     "color": {
-      "field": "Financial Year",
-      "type": "ordinal",
+      "field": "Source",
+      "type": "nominal",
       "scale": {
-        "domain": [2005, 2023],
-        "range": ["#bdbdbd", "#d62728"]
+        "domain": ["Fossil_GWh", "Renewable_GWh"],
+        "range": ["#8c564b", "#2ca02c"]
       },
-      "legend": {"title": "Year"}
+      "legend": {
+        "title": "Energy Source",
+        "labelExpr": "datum.value == 'Fossil_GWh' ? 'Fossil Fuels (Coal + Gas)' : 'Renewables'"
+      }
     },
-    "xOffset": {"field": "Financial Year"},
+    "xOffset": {"field": "Source"},
     "tooltip": [
-      {"field": "State_Full_Name", "type": "nominal", "title": "State"},
-      {"field": "Financial Year", "type": "ordinal", "title": "Year"},
+      {"field": "State", "type": "nominal", "title": "State"},
       {
-        "field": "Emissions",
+        "field": "Generation_GWh",
         "type": "quantitative",
-        "title": "Emissions (Mt)",
+        "title": "Generation (GWh)",
+        "format": ",.1f"
+      },
+      {
+        "field": "Renewable_Percentage",
+        "type": "quantitative",
+        "title": "Renewable Share (%)",
         "format": ".1f"
       }
     ]
