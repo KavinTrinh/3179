@@ -1,58 +1,55 @@
 import pandas as pd
 import numpy as np
 
-# Read the CSV file
-df = pd.read_csv(r'C:\Users\Khanh\OneDrive - z55rs\Documents\Monash\SEM2 2025\FIT3179\A2\3179\Data Visualisation 2\data\Australian Energy Statistics 2025 Table O(State summary 2024).csv')
 
-# Find where the actual data starts (after "GWh" row)
-# Skip the header rows and get to the data
-df_clean = pd.read_csv(r'C:\Users\Khanh\OneDrive - z55rs\Documents\Monash\SEM2 2025\FIT3179\A2\3179\Data Visualisation 2\data\Australian Energy Statistics 2025 Table O(State summary 2024).csv', skiprows=4)
 
-# Set the first column as index (fuel types)
-df_clean.columns = ['Fuel_Type', 'NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT', 'AUS']
+# Read the CSV
+df = pd.read_csv(r'C:\Users\Khanh\OneDrive - z55rs\Documents\Monash\SEM2 2025\FIT3179\A2\3179\Data Visualisation 2\data\Australian Energy Statistics 2025 Table O(State summary 2024).csv', skiprows=4)
+df.columns = ['Fuel_Type', 'NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT', 'AUS']
 
-# Remove empty rows and summary rows
-df_clean = df_clean[df_clean['Fuel_Type'].notna()]
-df_clean = df_clean[~df_clean['Fuel_Type'].str.contains('Total|Per cent|Notes|Totals', na=False)]
+# Clean data
+df = df[df['Fuel_Type'].notna()]
+for col in ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT']:
+    df[col] = df[col].str.replace(',', '').replace('', '0').astype(float)
 
-# Clean the data - remove commas and convert to float
-for col in ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT', 'AUS']:
-    df_clean[col] = df_clean[col].str.replace(',', '').astype(float)
+# Define fuel categories
+fuel_types = {
+    'Black coal': 'Non-Renewable',
+    'Brown coal': 'Non-Renewable',
+    'Natural gas': 'Non-Renewable',
+    'Oil products': 'Non-Renewable',
+    'Biomass': 'Renewable',
+    'Wind': 'Renewable',
+    'Hydro': 'Renewable',
+    'Large-scale solar PV': 'Renewable',
+    'Small-scale solar PV': 'Renewable'
+}
 
-# Separate renewable and non-renewable
-renewables = ['Biomass', 'Wind', 'Hydro', 'Large-scale solar PV', 'Small-scale solar PV', 'Geothermal']
-non_renewables = ['Black coal', 'Brown coal', 'Natural gas', 'Oil products']
+# Filter to actual fuel types
+df = df[df['Fuel_Type'].isin(fuel_types.keys())].copy()
+df['Category'] = df['Fuel_Type'].map(fuel_types)
 
-df_renewable = df_clean[df_clean['Fuel_Type'].isin(renewables)]
-df_non_renewable = df_clean[df_clean['Fuel_Type'].isin(non_renewables)]
+# Combine solar types for simplicity
+df['Fuel_Type'] = df['Fuel_Type'].replace({
+    'Large-scale solar PV': 'Solar',
+    'Small-scale solar PV': 'Solar'
+})
 
-# Calculate totals by state
-renewable_totals = df_renewable[['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT']].sum()
-non_renewable_totals = df_non_renewable[['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT']].sum()
+# Aggregate solar
+df = df.groupby(['Fuel_Type', 'Category'])[['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT']].sum().reset_index()
 
-# Create final dataframe for grouped bar chart
-states_data = []
-for state in ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT']:
-    fossil = non_renewable_totals[state]
-    renewable = renewable_totals[state]
-    total = fossil + renewable
-    renewable_pct = (renewable / total * 100) if total > 0 else 0
-    
-    states_data.append({
-        'State': state,
-        'Fossil_GWh': fossil,
-        'Renewable_GWh': renewable,
-        'Total_GWh': total,
-        'Renewable_Percentage': renewable_pct
-    })
-
-df_final = pd.DataFrame(states_data)
+# Reshape to long format
+df_long = df.melt(
+    id_vars=['Fuel_Type', 'Category'],
+    value_vars=['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT'],
+    var_name='State',
+    value_name='Generation_GWh'
+)
 
 # Save
-df_final.to_csv('state_electricity_generation_2024.csv', index=False)
+df_long.to_csv('state_energy_detailed_2024.csv', index=False)
 
-print("✓ Cleaned data saved!")
-print("\nFinal data:")
-print(df_final)
-print(f"\nRenewable percentages:")
-print(df_final[['State', 'Renewable_Percentage']].sort_values('Renewable_Percentage', ascending=False))
+print("✓ Detailed energy data saved!")
+print("\nSample:")
+print(df_long.head(15))
+print(f"\nFuel types: {df_long['Fuel_Type'].unique()}")

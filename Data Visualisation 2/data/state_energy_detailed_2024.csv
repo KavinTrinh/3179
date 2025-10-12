@@ -1,0 +1,57 @@
+Fuel_Type,Category,State,Generation_GWh
+Biomass,Renewable,NSW,1026.1
+Black coal,Non-Renewable,NSW,45812.6
+Brown coal,Non-Renewable,NSW,0.0
+Hydro,Renewable,NSW,3083.5
+Natural gas,Non-Renewable,NSW,2124.5
+Oil products,Non-Renewable,NSW,594.6
+Solar,Renewable,NSW,17592.7
+Wind,Renewable,NSW,6612.3
+Biomass,Renewable,VIC,734.4
+Black coal,Non-Renewable,VIC,0.0
+Brown coal,Non-Renewable,VIC,31412.9
+Hydro,Renewable,VIC,2719.8
+Natural gas,Non-Renewable,VIC,1830.2
+Oil products,Non-Renewable,VIC,205.5
+Solar,Renewable,VIC,8205.2
+Wind,Renewable,VIC,11163.9
+Biomass,Renewable,QLD,1442.9
+Black coal,Non-Renewable,QLD,42884.1
+Brown coal,Non-Renewable,QLD,0.0
+Hydro,Renewable,QLD,1463.5
+Natural gas,Non-Renewable,QLD,9300.2
+Oil products,Non-Renewable,QLD,1217.4
+Solar,Renewable,QLD,15577.5
+Wind,Renewable,QLD,2904.4
+Biomass,Renewable,WA,92.9
+Black coal,Non-Renewable,WA,7694.7
+Brown coal,Non-Renewable,WA,0.0
+Hydro,Renewable,WA,72.3
+Natural gas,Non-Renewable,WA,26943.9
+Oil products,Non-Renewable,WA,2089.9
+Solar,Renewable,WA,4903.5
+Wind,Renewable,WA,3783.2
+Biomass,Renewable,SA,88.9
+Black coal,Non-Renewable,SA,0.0
+Brown coal,Non-Renewable,SA,0.0
+Hydro,Renewable,SA,1.4
+Natural gas,Non-Renewable,SA,3711.7
+Oil products,Non-Renewable,SA,243.5
+Solar,Renewable,SA,4773.8
+Wind,Renewable,SA,6546.5
+Biomass,Renewable,TAS,35.8
+Black coal,Non-Renewable,TAS,0.0
+Brown coal,Non-Renewable,TAS,0.0
+Hydro,Renewable,TAS,6889.2
+Natural gas,Non-Renewable,TAS,501.7
+Oil products,Non-Renewable,TAS,13.1
+Solar,Renewable,TAS,402.3
+Wind,Renewable,TAS,1884.0
+Biomass,Renewable,NT,8.8
+Black coal,Non-Renewable,NT,0.0
+Brown coal,Non-Renewable,NT,0.0
+Hydro,Renewable,NT,0.0
+Natural gas,Non-Renewable,NT,4432.0
+Oil products,Non-Renewable,NT,505.0
+Solar,Renewable,NT,393.9
+Wind,Renewable,NT,0.0
