@@ -18,21 +18,12 @@ body {
     margin: auto;
     padding: 50px;
     padding-top: 35px;
-}
-
-/* Prevent Pure CSS grid from spreading columns apart */
-.pure-g {
-    margin-bottom: 40px;
-    letter-spacing: normal;  /* Fix Pure CSS spacing issue */
-}
-
-/* Ensure grid items don't stretch */
-.pure-g > div {
     box-sizing: border-box;
 }
 
 .vis-container {
     width: 100%;
+    box-sizing: border-box;
 }
 
 .description h2,
@@ -42,10 +33,23 @@ h1 {
 
 .description-right {
     padding-left: 20px;
+    box-sizing: border-box;
 }
 
 .description-left {
     padding-right: 20px;
+    box-sizing: border-box;
+}
+
+.pure-g {
+    margin-bottom: 40px;
+    letter-spacing: normal;
+}
+
+/* Ensure proper column spacing */
+.pure-g [class*="pure-u"] {
+    box-sizing: border-box;
+    padding-right: 0;
 }
 
 .small-font {
