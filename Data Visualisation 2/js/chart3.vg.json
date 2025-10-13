@@ -64,7 +64,14 @@
             "domain": ["Australia", "United States", "China", "India", "Germany", "United Kingdom", "Japan", "Canada"],
             "range": ["#000000", "#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#a65628", "#f781bf"]
           },
-          "legend": {"title": "Country (Click to select/deselect)"}
+          "legend": {
+            "title": "Country (Click to select/deselect)",
+            "orient": "bottom",          
+            "direction": "horizontal",
+            "columns": 4,                
+            "titleLimit": 300,           
+            "labelLimit": 120            
+          }
         },
         "opacity": {
           "value": 0.7
@@ -88,7 +95,7 @@
       }
     },
     {
-      "width": 700,
+      "width": 700  ,
       "height": 80,
       "transform": [
         {

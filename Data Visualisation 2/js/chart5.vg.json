@@ -79,7 +79,9 @@
               "axis": {
                 "title": "",
                 "tickCount": 10,
-                "grid": false,
+                "grid": true,
+                "gridColor": "#e0e0e0",
+                "gridOpacity": 0.5,
                 "format": "%Y"
               }
             },
@@ -89,7 +91,8 @@
               "title": "Change Since 2005 (%)",
               "axis": {
                 "grid": true,
-                "gridOpacity": 0.3
+                "gridColor": "#e0e0e0",
+                "gridOpacity": 0.5
               }
             },
             "color": {
@@ -117,8 +120,12 @@
               },
               "legend": {
                 "title": "Sector",
-                "orient": "right",
-                "labelLimit": 300
+                "orient": "none",
+                "legendX": 10,
+                "legendY": 10,
+                "padding": 10,
+                "cornerRadius": 5,
+                "labelLimit": 250
               }
             },
             "tooltip": [
@@ -219,7 +226,10 @@
           "axis": {
             "title": "Drag to select time range",
             "format": "%Y",
-            "tickCount": 10
+            "tickCount": 10,
+            "grid": true,
+            "gridColor": "#e0e0e0",
+            "gridOpacity": 0.5
           }
         },
         "y": {
@@ -227,7 +237,9 @@
           "type": "quantitative",
           "axis": {
             "tickCount": 3,
-            "grid": false,
+            "grid": true,
+            "gridColor": "#e0e0e0",
+            "gridOpacity": 0.5,
             "title": "Avg Change (%)"
           }
         }

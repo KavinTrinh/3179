@@ -156,7 +156,15 @@
               "#a65628"
             ]
           },
-          "legend": {"title": "Continent"}
+            "legend": {
+            "title": "Continent",
+            "orient": "right",       
+            "offset": 10,             
+            "direction": "vertical",  
+            "titleLimit": 120,        
+            "labelLimit": 120,      
+            "columns": 1          
+          }
         },
         "tooltip": [
           {"field": "Entity", "type": "nominal", "title": "Country"},
