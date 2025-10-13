@@ -9,6 +9,10 @@
   },
   "width": 800,
   "height": 600,
+  "autosize": {
+    "type": "fit",
+    "contains": "padding"
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_gdp_bubble_chart_data.csv"
   },
@@ -114,7 +118,8 @@
     {
       "mark": {
         "type": "circle",
-        "opacity": 0.6
+        "opacity": 0.6,
+        "clip": true
       },
       "encoding": {
         "size": {
@@ -195,7 +200,8 @@
         "type": "circle",
         "stroke": "#000",
         "strokeWidth": 2,
-        "fill": null
+        "fill": null,
+        "clip": true
       },
       "transform": [
         {"filter": "datum.Code == 'AUS'"}
@@ -243,7 +249,8 @@
         "dx": -12,
         "fontSize": 11.5,
         "fontStyle": "italic",
-        "fontWeight": "bold"
+        "fontWeight": "bold",
+        "clip": true
       },
       "encoding": {
         "text": {"field": "Entity", "type": "nominal"},

@@ -1,8 +1,167 @@
-#choropleth_map {
-	top:100px;
-	bottom: 100px; 
-	left: 100px;
-	right: 100px;
-	/*height: 1000px;
-	width: 800px;*/
+/* Global Styles */
+body * {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    padding: 20px 0;
+}
+
+/* Page Container */
+.page {
+    max-width: 1200px;
+    width: 90%;
+    background-color: white;
+    margin: auto;
+    padding: 60px;
+    padding-top: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #667eea;
+    margin-bottom: 50px;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 42px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #7f8c8d;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Typography */
+h2 {
+    margin-top: 0px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Descriptions */
+.description-right {
+    padding-left: 25px;
+}
+
+.description-left {
+    padding-right: 25px;
+}
+
+.insight {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 12px 15px;
+    margin: 15px 0;
+    font-style: italic;
+    border-radius: 4px;
+}
+
+.chart-caption {
+    font-size: 13px;
+    color: #7f8c8d;
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Visualization Container */
+.vis-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Grid Spacing */
+.pure-g {
+    margin-bottom: 60px;
+}
+
+/* Dividers */
+.divider {
+    height: 2px;
+    background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+    margin: 40px 0;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 2px solid #ecf0f1;
+    margin-top: 40px;
+}
+
+.footer p {
+    font-size: 13px;
+    color: #95a5a6;
+    margin: 5px 0;
+}
+
+.footer a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page {
+        width: 95%;
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .description-left,
+    .description-right {
+        padding: 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .page {
+        box-shadow: none;
+        max-width: 100%;
+    }
 }

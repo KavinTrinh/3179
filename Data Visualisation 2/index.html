@@ -1,27 +1,181 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
-  
+  <title>Australia's Carbon Challenge: A Data Story</title>
+  <!-- Import Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
   <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
-
-
 </head>
+
 <body>
-  
-<div id="choropleth_map"></div>
 
-<script type="text/javascript">
+  <div class="page">
 
-  var spec2 = "js/chart2.vg.json";
-  vegaEmbed('#choropleth_map', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+    <!-- Header -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="header">
+          <h1>Australia's Carbon Challenge</h1>
+          <p class="subtitle">A Global Perspective and Local Reality: Exploring emissions, economic growth, and the path to a sustainable future</p>
+        </div>
+      </div>
+    </div>
+    <!-- end header -->
 
+    <!-- Chart 1: Global CO2 Map (First and Second Columns Combined) -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>The Global Carbon Landscape</h2>
+          <p>Australia stands out on the world stage with one of the highest per capita CO₂ emissions among developed nations. 
+             This interactive map reveals our position - ranked among the top emitters globally when adjusted for population.</p>
+          <p><strong>Key Insight:</strong> While total emissions matter, per capita figures tell the real story of carbon intensity 
+             and lifestyle impact.</p>
+        </div>
+      </div>
+    </div>
+    <!-- end Chart 1 -->
+
+    <div class="divider"></div>
+
+    <!-- Chart 2: Bubble Chart CO2 vs GDP (Two Equal Columns) -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div class="description description-left">
+          <h2>Economic Growth vs Environmental Cost</h2>
+          <p>Does economic prosperity require high emissions? This interactive visualization explores the relationship 
+             between GDP and CO₂ emissions from 1970 to 2020.</p>
+          <p><strong>What to explore:</strong> Use the year slider to see how countries' positions change over time. 
+             Notice how some nations "decouple" economic growth from emissions, while others remain locked in carbon-intensive development.</p>
+          <p class="insight">Australia's challenge: Our emissions per dollar of GDP remain stubbornly high compared to European peers.</p>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <div id="vis2" class="vis-container"></div>
+      </div>
+    </div>
+    <!-- end Chart 2 -->
+
+    <div class="divider"></div>
+
+    <!-- Chart 3: Multi-Line Regional Emissions (First and Second Columns Combined) -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis3" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Two Decades of Progress</h2>
+          <p>How does Australia's emissions trajectory compare to other regions? This chart reveals striking differences 
+             in regional carbon journeys since 1970.</p>
+          <p><strong>Interactive feature:</strong> Use the brush selector below the main chart to zoom into specific time periods 
+             and examine trends in detail.</p>
+          <p class="insight">While Europe stabilized and began declining emissions post-2005, Asia's rapid industrialization 
+             drove unprecedented growth. Where does Oceania (Australia) fit in this story?</p>
+        </div>
+      </div>
+    </div>
+    <!-- end Chart 3 -->
+
+    <div class="divider"></div>
+
+    <!-- Charts 4 & 5: State Map and Sector Trends (Three Equal Columns) -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Inside Australia</h2>
+          <p><strong>State Evolution:</strong> Three decades of state-by-state emissions changes reveal winners and laggards 
+             in Australia's carbon journey.</p>
+          <p><strong>Sectoral Breakdown:</strong> Understanding which economic sectors drive emissions is key to crafting 
+             effective policy responses.</p>
+          <p class="insight">Queensland and NSW dominate total emissions, but per capita tells a different story - 
+             industrial states like NT lead the charts.</p>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div id="vis4" class="vis-container"></div>
+        <p class="chart-caption">Use the year slider to animate through Australia's state-level emissions from 1990 to 2023.</p>
+      </div>
+      <div class="pure-u-1-3">
+        <div id="vis5" class="vis-container"></div>
+        <p class="chart-caption">Drag on the bottom chart to zoom into specific time periods and examine sectoral trends.</p>
+      </div>
+    </div>
+    <!-- end Charts 4 & 5 -->
+
+    <div class="divider"></div>
+
+    <!-- Chart 6: Energy Mix Double Bar (First and Second Columns Combined) -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis6" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>The Energy Transition</h2>
+          <p>Australia's path to lower emissions runs through its energy system. This dual-stacked bar chart reveals 
+             each state's progress - and challenges - in transitioning from fossil fuels to renewables.</p>
+          <p><strong>Reading the chart:</strong> Left bars show renewable composition (solar, wind, hydro), right bars 
+             show fossil fuel reliance (coal, gas). The percentage labels show each state's renewable share.</p>
+          <p class="insight">Tasmania (95% renewable) and South Australia (74%) prove clean energy can power a modern economy. 
+             Queensland and Northern Territory lag far behind, still burning coal and gas for over 70% of electricity.</p>
+          <p><strong>The message is clear:</strong> States with ambitious renewable policies have drastically lower emissions. 
+             The technology exists - what's missing is political will.</p>
+        </div>
+      </div>
+    </div>
+    <!-- end Chart 6 -->
+
+    <!-- Footer -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="footer">
+          <p>This visualization was created by <strong>Tuan Khanh Trinh</strong> for FIT3179 Data Visualisation 2, Semester 2 2025.</p>
+          <p>Data sources: <a href="https://ourworldindata.org/co2-emissions" target="_blank">Our World in Data</a>, 
+             <a href="https://www.energy.gov.au/" target="_blank">Australian Government Energy Statistics</a>, 
+             <a href="https://www.dcceew.gov.au/" target="_blank">Department of Climate Change</a></p>
+        </div>
+      </div>
+    </div>
+    <!-- end footer -->
+
+  </div> <!-- end page -->
+
+  <script type="text/javascript">
+    // Chart specifications
+    var spec1 = "./js/chart1.vg.json";
+    var spec2 = "./js/chart2.vg.json";
+    var spec3 = "./js/chart3.vg.json";
+    var spec4 = "./js/chart4.vg.json";
+    var spec5 = "./js/chart5.vg.json";
+    var spec6 = "./js/chart6.vg.json";
+
+    // Embed visualizations
+    vegaEmbed('#vis1', spec1, { "actions": false }).catch(console.error);
+    vegaEmbed('#vis2', spec2, { "actions": false }).catch(console.error);
+    vegaEmbed('#vis3', spec3, { "actions": false }).catch(console.error);
+    vegaEmbed('#vis4', spec4, { "actions": false }).catch(console.error);
+    vegaEmbed('#vis5', spec5, { "actions": false }).catch(console.error);
+    vegaEmbed('#vis6', spec6, { "actions": false }).catch(console.error);
+  </script>
 </body>
+
 </html>
