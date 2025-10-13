@@ -12,7 +12,7 @@
   },
   "vconcat": [
     {
-      "width": 800,
+      "width": "container", 
       "height": 400,
       "transform": [
         {

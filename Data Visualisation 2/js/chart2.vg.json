@@ -7,7 +7,7 @@
     "subtitleFontSize": 14,
     "anchor": "start"
   },
-  "width": 800,
+  "width": "container",
   "height": 600,
   "autosize": {
     "type": "fit",

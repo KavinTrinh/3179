@@ -7,7 +7,8 @@
     "subtitleFontSize": 14,
     "anchor": "start"
   },
-  "width": 800,
+  "width": "container", 
+  "autosize": {"type": "fit"},
   "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/state_energy_detailed_2024.csv"

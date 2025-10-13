@@ -9,8 +9,8 @@
     "color": "#333",
     "subtitleColor": "#666"
   },
-  "width": "container",
-  "height": 450,
+  "width": "container", 
+  "autosize": {"type": "fit"},
   "params": [
     {
       "name": "Year_selection",
