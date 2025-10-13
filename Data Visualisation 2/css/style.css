@@ -7,17 +7,28 @@ h1 {
 }
 
 body {
-    background-color: lightgray;  /* ← Gray background for the page */
+    background-color: lightgray;
     margin: 0;
     padding: 0;
 }
 
 .page {
-    width: 1200px;  
+    width: 1200px;
     background-color: white;
-    margin: auto;  
+    margin: auto;
     padding: 50px;
     padding-top: 35px;
+}
+
+/* Prevent Pure CSS grid from spreading columns apart */
+.pure-g {
+    margin-bottom: 40px;
+    letter-spacing: normal;  /* Fix Pure CSS spacing issue */
+}
+
+/* Ensure grid items don't stretch */
+.pure-g > div {
+    box-sizing: border-box;
 }
 
 .vis-container {
@@ -35,10 +46,6 @@ h1 {
 
 .description-left {
     padding-right: 20px;
-}
-
-.pure-g {
-    margin-bottom: 40px;
 }
 
 .small-font {
