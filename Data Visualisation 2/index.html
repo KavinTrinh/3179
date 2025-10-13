@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Australia's Carbon Challenge: A Data Story</title>
+  <title>Australia's Carbon Challenge | Data Visualisation</title>
   <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
@@ -29,15 +29,13 @@
     <!-- Header -->
     <div class="pure-g">
       <div class="pure-u-1-1">
-        <div class="header">
-          <h1>Australia's Carbon Challenge</h1>
-          <p class="subtitle">A Global Perspective and Local Reality: Exploring emissions, economic growth, and the path to a sustainable future</p>
-        </div>
+        <h1>Australia's Carbon Challenge</h1>
+        <p>A Global Perspective and Local Reality: Exploring emissions, economic growth, and the path to a sustainable future</p>
       </div>
     </div>
     <!-- end header -->
 
-    <!-- Chart 1: Global CO2 Map (First and Second Columns Combined) -->
+    <!-- Chart 1: Global CO2 Map (First and Second Columns Combined = 2/3 + 1/3) -->
     <div class="pure-g">
       <div class="pure-u-2-3">
         <div id="vis1" class="vis-container"></div>
@@ -46,26 +44,23 @@
         <div class="description description-right">
           <h2>The Global Carbon Landscape</h2>
           <p>Australia stands out on the world stage with one of the highest per capita CO₂ emissions among developed nations. 
-             This interactive map reveals our position - ranked among the top emitters globally when adjusted for population.</p>
-          <p><strong>Key Insight:</strong> While total emissions matter, per capita figures tell the real story of carbon intensity 
-             and lifestyle impact.</p>
+             This interactive map reveals our position among global emitters.</p>
+          <p><strong>Key Insight:</strong> Use the year slider to see how emissions evolved over time. Per capita figures tell 
+             the real story of carbon intensity.</p>
         </div>
       </div>
     </div>
     <!-- end Chart 1 -->
 
-    <div class="divider"></div>
-
-    <!-- Chart 2: Bubble Chart CO2 vs GDP (Two Equal Columns) -->
+    <!-- Chart 2: Bubble Chart CO2 vs GDP (Two Equal Columns = 1/2 + 1/2) -->
     <div class="pure-g">
       <div class="pure-u-1-2">
         <div class="description description-left">
           <h2>Economic Growth vs Environmental Cost</h2>
-          <p>Does economic prosperity require high emissions? This interactive visualization explores the relationship 
-             between GDP and CO₂ emissions from 1970 to 2020.</p>
-          <p><strong>What to explore:</strong> Use the year slider to see how countries' positions change over time. 
-             Notice how some nations "decouple" economic growth from emissions, while others remain locked in carbon-intensive development.</p>
-          <p class="insight">Australia's challenge: Our emissions per dollar of GDP remain stubbornly high compared to European peers.</p>
+          <p>Does economic prosperity require high emissions? This visualization explores the relationship between 
+             GDP and CO₂ emissions from 1970 to 2020.</p>
+          <p><strong>Interactive:</strong> Use filters to explore by continent and population. Notice how bubble size 
+             represents population, revealing different development patterns.</p>
         </div>
       </div>
       <div class="pure-u-1-2">
@@ -74,9 +69,7 @@
     </div>
     <!-- end Chart 2 -->
 
-    <div class="divider"></div>
-
-    <!-- Chart 3: Multi-Line Regional Emissions (First and Second Columns Combined) -->
+    <!-- Chart 3: Multi-Line Regional Emissions (First and Second Columns Combined = 2/3 + 1/3) -->
     <div class="pure-g">
       <div class="pure-u-2-3">
         <div id="vis3" class="vis-container"></div>
@@ -84,46 +77,36 @@
       <div class="pure-u-1-3">
         <div class="description description-right">
           <h2>Two Decades of Progress</h2>
-          <p>How does Australia's emissions trajectory compare to other regions? This chart reveals striking differences 
-             in regional carbon journeys since 1970.</p>
-          <p><strong>Interactive feature:</strong> Use the brush selector below the main chart to zoom into specific time periods 
-             and examine trends in detail.</p>
-          <p class="insight">While Europe stabilized and began declining emissions post-2005, Asia's rapid industrialization 
-             drove unprecedented growth. Where does Oceania (Australia) fit in this story?</p>
+          <p>How does Australia's emissions trajectory compare to other regions? This chart reveals striking 
+             differences in regional carbon journeys.</p>
+          <p><strong>Use the brush:</strong> Drag on the bottom chart to zoom into specific time periods and examine 
+             trends in detail. Oceania's line (with Australia) is highlighted in bold.</p>
         </div>
       </div>
     </div>
     <!-- end Chart 3 -->
 
-    <div class="divider"></div>
-
-    <!-- Charts 4 & 5: State Map and Sector Trends (Three Equal Columns) -->
+    <!-- Charts 4 & 5: State Map and Sector Trends (Three Equal Columns = 1/3 + 1/3 + 1/3) -->
     <div class="pure-g">
       <div class="pure-u-1-3">
         <div class="description description-left">
           <h2>Inside Australia</h2>
-          <p><strong>State Evolution:</strong> Three decades of state-by-state emissions changes reveal winners and laggards 
-             in Australia's carbon journey.</p>
-          <p><strong>Sectoral Breakdown:</strong> Understanding which economic sectors drive emissions is key to crafting 
-             effective policy responses.</p>
-          <p class="insight">Queensland and NSW dominate total emissions, but per capita tells a different story - 
-             industrial states like NT lead the charts.</p>
+          <p><strong>State Evolution:</strong> Three decades of state-by-state emissions reveal regional patterns 
+             and disparities across Australia.</p>
+          <p><strong>Sectoral Breakdown:</strong> Understanding which sectors drive emissions is key to policy responses.</p>
+          <p>Queensland and NSW dominate totals, but per capita tells a different story.</p>
         </div>
       </div>
       <div class="pure-u-1-3">
         <div id="vis4" class="vis-container"></div>
-        <p class="chart-caption">Use the year slider to animate through Australia's state-level emissions from 1990 to 2023.</p>
       </div>
       <div class="pure-u-1-3">
         <div id="vis5" class="vis-container"></div>
-        <p class="chart-caption">Drag on the bottom chart to zoom into specific time periods and examine sectoral trends.</p>
       </div>
     </div>
     <!-- end Charts 4 & 5 -->
 
-    <div class="divider"></div>
-
-    <!-- Chart 6: Energy Mix Double Bar (First and Second Columns Combined) -->
+    <!-- Chart 6: Energy Mix Double Bar (First and Second Columns Combined = 2/3 + 1/3) -->
     <div class="pure-g">
       <div class="pure-u-2-3">
         <div id="vis6" class="vis-container"></div>
@@ -131,14 +114,11 @@
       <div class="pure-u-1-3">
         <div class="description description-right">
           <h2>The Energy Transition</h2>
-          <p>Australia's path to lower emissions runs through its energy system. This dual-stacked bar chart reveals 
-             each state's progress - and challenges - in transitioning from fossil fuels to renewables.</p>
+          <p>Australia's path to lower emissions runs through its energy system. This chart reveals each state's 
+             progress in transitioning from fossil fuels to renewables.</p>
           <p><strong>Reading the chart:</strong> Left bars show renewable composition (solar, wind, hydro), right bars 
-             show fossil fuel reliance (coal, gas). The percentage labels show each state's renewable share.</p>
-          <p class="insight">Tasmania (95% renewable) and South Australia (74%) prove clean energy can power a modern economy. 
-             Queensland and Northern Territory lag far behind, still burning coal and gas for over 70% of electricity.</p>
-          <p><strong>The message is clear:</strong> States with ambitious renewable policies have drastically lower emissions. 
-             The technology exists - what's missing is political will.</p>
+             show fossil fuel reliance (coal, gas). Percentage labels show renewable share.</p>
+          <p>Tasmania (95%) and South Australia (74%) prove clean energy works. Queensland and NT lag behind.</p>
         </div>
       </div>
     </div>
@@ -146,13 +126,10 @@
 
     <!-- Footer -->
     <div class="pure-g">
-      <div class="pure-u-1-1">
-        <div class="footer">
-          <p>This visualization was created by <strong>Tuan Khanh Trinh</strong> for FIT3179 Data Visualisation 2, Semester 2 2025.</p>
-          <p>Data sources: <a href="https://ourworldindata.org/co2-emissions" target="_blank">Our World in Data</a>, 
-             <a href="https://www.energy.gov.au/" target="_blank">Australian Government Energy Statistics</a>, 
-             <a href="https://www.dcceew.gov.au/" target="_blank">Department of Climate Change</a></p>
-        </div>
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <strong>Your Name</strong> for FIT3179 Data Visualisation 2. 
+           Data sources: <a href="https://ourworldindata.org/co2-emissions" target="_blank">Our World in Data</a>, 
+           <a href="https://www.energy.gov.au/" target="_blank">Australian Energy Statistics</a>.</p>
       </div>
     </div>
     <!-- end footer -->
@@ -168,7 +145,7 @@
     var spec5 = "./js/chart5.vg.json";
     var spec6 = "./js/chart6.vg.json";
 
-    // Embed visualizations
+    // Embed visualizations with proper configuration
     vegaEmbed('#vis1', spec1, { "actions": false }).catch(console.error);
     vegaEmbed('#vis2', spec2, { "actions": false }).catch(console.error);
     vegaEmbed('#vis3', spec3, { "actions": false }).catch(console.error);

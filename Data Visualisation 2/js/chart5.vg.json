@@ -3,8 +3,8 @@
   "title": {
     "text": "Breaking Down the Sources: Sectoral Emissions Trends",
     "subtitle": "Percentage change in emissions by sector since 2005 - Use bottom chart to zoom",
-    "fontSize": 20,
-    "subtitleFontSize": 14,
+    "fontSize": 14,
+    "subtitleFontSize": 12,
     "anchor": "start"
   },
   "data": {
@@ -12,7 +12,7 @@
   },
   "vconcat": [
     {
-      "width": "container",
+      "width": 340,
       "height": 400,
       "transform": [
         {
@@ -147,7 +147,7 @@
       ]
     },
     {
-      "width": 800,
+      "width": 340,
       "height": 80,
       "transform": [
         {

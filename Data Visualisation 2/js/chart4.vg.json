@@ -3,12 +3,11 @@
   "title": {
     "text": "Australia's Carbon Journey: State-by-State Evolution",
     "subtitle": "Three decades of emissions change across Australian states (1990-2023)",
-    "fontSize": 20,
-    "subtitleFontSize": 14,
+    "fontSize": 14,
+    "subtitleFontSize": 12,
     "anchor": "start"
   },
-  "width": "container", 
-  "autosize": {"type": "fit"},
+  "width": 340,
   "height": 500,
   "params": [
     {
@@ -26,7 +25,7 @@
   "projection": {
     "type": "equirectangular",
     "center": [133, -28],
-    "scale": 800
+    "scale": 450
   },
   "layer": [
     {

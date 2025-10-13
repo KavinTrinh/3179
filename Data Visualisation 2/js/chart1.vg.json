@@ -9,8 +9,8 @@
     "color": "#333",
     "subtitleColor": "#666"
   },
-  "width": "container", 
-  "autosize": {"type": "fit"},
+  "width": 700,
+  "height": 450,
   "params": [
     {
       "name": "Year_selection",
@@ -23,10 +23,10 @@
     },
     {
       "name": "zoom_level",
-      "value": 150,
+      "value": 135,
       "bind": {
         "input": "range",
-        "min": 150,
+        "min": 135,
         "max": 1000,
         "step": 10,
         "name": "Zoom: "

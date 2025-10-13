@@ -3,8 +3,8 @@
   "title": {
     "text": "Australia's Emissions Journey vs Major Economies",
     "subtitle": "CO2 emissions comparison 1970-2020 - Use the bottom chart to zoom",
-    "fontSize": 20,
-    "subtitleFontSize": 14,
+    "fontSize": 14,
+    "subtitleFontSize": 12,
     "anchor": "start"
   },
   "data": {
@@ -12,7 +12,7 @@
   },
   "vconcat": [
     {
-      "width": "container", 
+      "width": 700, 
       "height": 400,
       "transform": [
         {
@@ -88,7 +88,7 @@
       }
     },
     {
-      "width": 800,
+      "width": 700,
       "height": 80,
       "transform": [
         {
