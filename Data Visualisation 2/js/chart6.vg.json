@@ -18,71 +18,95 @@
   },
   "hconcat": [
     {
-    "title": "Renewable Energy",
-    "width": 350,
-    "transform": [
+      "title": "Renewable Energy",
+      "width": 400,
+      "transform": [
         {
-        "joinaggregate": [
+          "joinaggregate": [
             {"op": "sum", "field": "Generation_GWh", "as": "Total_Generation"}
-        ],
-        "groupby": ["State"]
+          ],
+          "groupby": ["State"]
         },
         {
-        "joinaggregate": [
+          "joinaggregate": [
             {"op": "sum", "field": "Generation_GWh", "as": "Category_Total"}
-        ],
-        "groupby": ["State", "Category"]
+          ],
+          "groupby": ["State", "Category"]
         },
         {
-        "calculate": "(datum.Category_Total / datum.Total_Generation) * 100",
-        "as": "Category_Percentage"
+          "calculate": "(datum.Category_Total / datum.Total_Generation) * 100",
+          "as": "Category_Percentage"
         },
         {"filter": "datum.Category == 'Renewable'"}
-    ],
-    "mark": "bar",
-    "encoding": {
+      ],
+      "mark": "bar",
+      "encoding": {
         "y": {
-        "field": "State",
-        "type": "nominal",
-        "axis": null,
-        "sort": ["TAS", "SA", "VIC", "NSW", "QLD", "WA", "NT"]
+          "field": "State",
+          "type": "nominal",
+          "axis": null,
+          "sort": ["TAS", "SA", "VIC", "NSW", "QLD", "WA", "NT"]
         },
         "x": {
-        "field": "Generation_GWh",
-        "type": "quantitative",
-        "title": "Renewable Generation (GWh)",
-        "sort": "descending",
-        "axis": {"orient": "top"}
+          "field": "Generation_GWh",
+          "type": "quantitative",
+          "title": "Renewable Generation (GWh)",
+          "sort": "descending",
+          "axis": {"orient": "top"}
         },
         "color": {
-        "field": "Fuel_Type",
-        "type": "nominal",
-        "scale": {
+          "field": "Fuel_Type",
+          "type": "nominal",
+          "scale": {
             "domain": ["Solar", "Wind", "Hydro", "Biomass"],
             "range": ["#ffd700", "#87ceeb", "#1e90ff", "#90ee90"]
-        },
-        "legend": {
+          },
+          "legend": {
             "title": "Renewable Type",
             "orient": "bottom"
-        }
+          }
         },
         "tooltip": [
-        {"field": "State", "type": "nominal", "title": "State"},
-        {"field": "Fuel_Type", "type": "nominal", "title": "Fuel Type"},
-        {
+          {"field": "State", "type": "nominal", "title": "State"},
+          {"field": "Fuel_Type", "type": "nominal", "title": "Fuel Type"},
+          {
             "field": "Generation_GWh",
             "type": "quantitative",
             "title": "Generation (GWh)",
             "format": ",.0f"
-        },
-        {
+          },
+          {
             "field": "Category_Percentage",
             "type": "quantitative",
             "title": "% of State Total",
             "format": ".1f"
-        }
+          }
         ]
-    }
+      }
+    },
+    {
+      "width": 60,
+      "transform": [
+        {
+          "aggregate": [{"op": "max", "field": "Generation_GWh", "as": "dummy"}],
+          "groupby": ["State"]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "y": {
+          "field": "State",
+          "type": "nominal",
+          "axis": null,
+          "sort": ["TAS", "SA", "VIC", "NSW", "QLD", "WA", "NT"]
+        },
+        "text": {"field": "State", "type": "nominal"}
+      }
     },
     {
       "title": "Fossil Fuel Energy",
