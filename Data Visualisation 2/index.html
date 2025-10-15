@@ -3,140 +3,121 @@
 
 <head>
   <title>Australia's Carbon Challenge | Data Visualisation</title>
-  <!-- Import Vega & Vega-Lite -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
 
-  <!-- Import pure.css -->
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
     integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <!-- CSS file -->
   <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
+  
 </head>
 
 <body>
 
   <div class="page">
 
-    <!-- Header -->
     <div class="pure-g">
-      <div class="pure-u-1-1">
+      <div class="pure-u-1-1 header">
+        <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="60px" height="60px">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-15h2v3h-2zm0 4h2v5h-2zm0 6h2v2h-2z"/>
+        </svg>
         <h1>Australia's Emission Challenge</h1>
-        <p>A Global Perspective and Local Reality: Exploring emissions, economic growth, and the path to a sustainable future</p>
+        <p class="subtitle">A Global Perspective and Local Reality: Exploring emissions, economic growth, and the path to a sustainable future.</p>
       </div>
     </div>
-    <!-- end header -->
-
-    <!-- Chart 1: Global CO2 Map (First and Second Columns Combined = 2/3 + 1/3) -->
-    <div class="pure-g">
+    <div class="pure-g viz-row">
+      <div class="pure-u-1-3">
+        <div class="description">
+          <h2>The Global Carbon Landscape</h2>
+          <p>Australia stands out on the world stage with one of the highest per capita CO₂ emissions among developed nations. This interactive map reveals our position among global emitters.</p>
+          <div class="callout">
+            <p><strong>Key Insight:</strong> Use the year slider to see how emissions evolved. Per capita figures tell the real story of carbon intensity.</p>
+          </div>
+        </div>
+      </div>
       <div class="pure-u-2-3">
         <div id="vis1" class="vis-container"></div>
       </div>
-      <div class="pure-u-1-3">
-        <div class="description description-right">
-          <h2>The Global Carbon Landscape</h2>
-          <p>Australia stands out on the world stage with one of the highest per capita CO₂ emissions among developed nations. 
-             This interactive map reveals our position among global emitters.</p>
-          <p><strong>Key Insight:</strong> Use the year slider to see how emissions evolved over time. Per capita figures tell 
-             the real story of carbon intensity.</p>
-        </div>
-      </div>
     </div>
-    <!-- end Chart 1 -->
-
-    <!-- Chart 2: Bubble Chart CO2 vs GDP (Two Equal Columns = 1/2 + 1/2) -->
-    <div class="pure-g">
-      <div class="pure-u-1-2">
-        <div class="description description-left">
-          <h2>Economic Growth vs Environmental Cost</h2>
-          <p>Does economic prosperity require high emissions? This visualization explores the relationship between 
-             GDP and CO₂ emissions from 1970 to 2020.</p>
-          <p><strong>Interactive:</strong> Use filters to explore by continent and population. Notice how bubble size 
-             represents population, revealing different development patterns.</p>
+    <div class="pure-g viz-row viz-row-alt">
+      <div class="pure-u-1-3">
+        <div class="description">
+          <h2>Economic Growth vs. Environmental Cost</h2>
+          <p>Does economic prosperity require high emissions? This visualization explores the relationship between GDP and CO₂ emissions from 1970 to 2020.</p>
+          <div class="callout">
+             <p><strong>Interactive:</strong> Use filters to explore by continent and population. Notice how bubble size represents population, revealing different development patterns.</p>
+          </div>
         </div>
       </div>
-      <div class="pure-u-1-2">
+      <div class="pure-u-2-3">
         <div id="vis2" class="vis-container"></div>
       </div>
     </div>
-    <!-- end Chart 2 -->
-
-    <!-- Chart 3: Multi-Line Regional Emissions (First and Second Columns Combined = 2/3 + 1/3) -->
-    <div class="pure-g">
+    <div class="pure-g viz-row">
+      <div class="pure-u-1-3">
+        <div class="description">
+          <h2>Two Decades of Progress</h2>
+          <p>How does Australia's emissions trajectory compare to other regions? This chart reveals striking differences in regional carbon journeys.</p>
+          <div class="callout">
+            <p><strong>Use the brush:</strong> Drag on the bottom chart to zoom into specific time periods and examine trends in detail. Oceania's line is highlighted in bold.</p>
+          </div>
+        </div>
+      </div>
       <div class="pure-u-2-3">
         <div id="vis3" class="vis-container"></div>
       </div>
+    </div>
+    <div class="pure-g viz-row viz-row-alt">
+        <div class="pure-u-1-3">
+            <div class="description">
+              <h2>Inside Australia: State by State</h2>
+              <p>Three decades of state-by-state emissions reveal regional patterns and disparities across Australia. Queensland and NSW dominate totals, but per capita tells a different story.</p>
+            </div>
+        </div>
+        <div class="pure-u-2-3">
+            <div id="vis4" class="vis-container"></div>
+        </div>
+    </div>
+    <div class="pure-g viz-row">
+        <div class="pure-u-1-3">
+            <div class="description">
+                <h2>Inside Australia: Sector Breakdown</h2>
+                <p>Understanding which sectors drive emissions is key to policy responses. This chart highlights the primary contributors to Australia's carbon footprint over time.</p>
+            </div>
+        </div>
+        <div class="pure-u-2-3">
+            <div id="vis5" class="vis-container"></div>
+        </div>
+    </div>
+    <div class="pure-g viz-row viz-row-alt">
       <div class="pure-u-1-3">
-        <div class="description description-right">
-          <h2>Two Decades of Progress</h2>
-          <p>How does Australia's emissions trajectory compare to other regions? This chart reveals striking 
-             differences in regional carbon journeys.</p>
-          <p><strong>Use the brush:</strong> Drag on the bottom chart to zoom into specific time periods and examine 
-             trends in detail. Oceania's line (with Australia) is highlighted in bold.</p>
+        <div class="description">
+          <h2>The Energy Transition</h2>
+          <p>Australia's path to lower emissions runs through its energy system. This chart reveals each state's progress in transitioning from fossil fuels to renewables.</p>
+           <div class="callout">
+            <p><strong>Reading the chart:</strong> Left bars show renewables, right bars show fossil fuels. Tasmania (95%) and South Australia (74%) prove clean energy works.</p>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- end Chart 3 -->
-
-    <!-- Charts 4 & 5: State Map and Sector Trends (Three Equal Columns = 1/3 + 1/3 + 1/3) -->
-    <div class="pure-g">
-      <div class="pure-u-1-3">
-        <div class="description description-left">
-          <h2>Inside Australia</h2>
-          <p><strong>State Evolution:</strong> Three decades of state-by-state emissions reveal regional patterns 
-             and disparities across Australia.</p>
-          <p><strong>Sectoral Breakdown:</strong> Understanding which sectors drive emissions is key to policy responses.</p>
-          <p>Queensland and NSW dominate totals, but per capita tells a different story.</p>
-        </div>
-      </div>
-      <div class="pure-u-1-3">
-        <div id="vis4" class="vis-container"></div>
-      </div>
-      <div class="pure-u-1-3">
-        <div id="vis5" class="vis-container"></div>
-      </div>
-    </div>
-    <!-- end Charts 4 & 5 -->
-
-    <!-- Chart 6: Energy Mix Double Bar (First and Second Columns Combined = 2/3 + 1/3) -->
-    <div class="pure-g">
       <div class="pure-u-2-3">
         <div id="vis6" class="vis-container"></div>
       </div>
-      <div class="pure-u-1-3">
-        <div class="description description-right">
-          <h2>The Energy Transition</h2>
-          <p>Australia's path to lower emissions runs through its energy system. This chart reveals each state's 
-             progress in transitioning from fossil fuels to renewables.</p>
-          <p><strong>Reading the chart:</strong> Left bars show renewable composition (solar, wind, hydro), right bars 
-             show fossil fuel reliance (coal, gas). Percentage labels show renewable share.</p>
-          <p>Tasmania (95%) and South Australia (74%) prove clean energy works. Queensland and NT lag behind.</p>
-        </div>
-      </div>
     </div>
-    <!-- end Chart 6 -->
-
-    <!-- Footer -->
     <div class="pure-g">
-      <div class="pure-u-1-1 small-font">
-        <p>This visualisation is created by <strong>Tuan Khanh Trinh - 34300236</strong> for FIT3179 Data Visualisation 2. 
-           Data sources: <a href="https://ourworldindata.org/co2-emissions" target="_blank">Our World in Data</a>, 
-           <a href="https://www.energy.gov.au/" target="_blank">Australian Energy Statistics</a>.</p>
+      <div class="pure-u-1-1 footer">
+        <p>This visualisation is created by <strong>Tuan Khanh Trinh - 34300236</strong> for FIT3179 Data Visualisation 2.
+          Data sources: <a href="https://ourworldindata.org/co2-emissions" target="_blank">Our World in Data</a>,
+          <a href="https://www.energy.gov.au/" target="_blank">Australian Energy Statistics</a>.</p>
       </div>
     </div>
-    <!-- end footer -->
-
-  </div> <!-- end page -->
-
-  <script type="text/javascript">
+    </div> <script type="text/javascript">
     // Chart specifications
     var spec1 = "./js/chart1.vg.json";
     var spec2 = "./js/chart2.vg.json";

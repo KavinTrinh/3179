@@ -1,24 +1,131 @@
-body * {
+/* --- UPDATED HEADER STYLE --- */
+
+.header {
+    /* The new linear gradient background */
+    background-image: linear-gradient(135deg, #FF4500, #D22B2B);
+
+    /* Styling for the header block */
+    text-align: center;
+    padding: 80px 40px;
+    margin-bottom: 50px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.1);
+}
+/* --- NEW HEADER ICON STYLE --- */
+.header-icon {
+    margin-bottom: 20px; /* Space between icon and title */
+    opacity: 0.8; /* Make it slightly transparent to blend in */
+}
+/* More specific selector to override the general h1 style.
+  This says "Find an h1 ONLY IF it is inside .header".
+*/
+.header h1 {
+    color: #ffffff; /* This will now correctly apply */
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* This specifically targets the subtitle inside the header */
+.header p.subtitle {
+    color: #ffffff; /* This makes the subtitle white as well */
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* --- BASE & TYPOGRAPHY --- */
+
+body {
+    /* A subtle, clean background that makes the cards pop */
+    background-color: #f8f9fa; 
+    margin: 0;
+    padding: 40px 0; /* More vertical space */
     font-family: 'Open Sans', sans-serif;
+    color: #343a40; 
+}
+
+h1, h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #212529; 
+    margin-top: 0;
 }
 
 h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.25em;
     font-weight: 900;
 }
 
-body {
-    background-color: lightgray;
-    margin: 0;
-    padding: 0;
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
 }
 
+p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 1em;
+}
+
+p.subtitle {
+    font-size: 1.1em;
+    color: #6c757d;
+    margin-top: 0;
+}
+
+a {
+    color: #0077b6;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #023e8a;
+    text-decoration: underline;
+}
+
+/* --- MAIN PAGE & FOOTER --- */
+
 .page {
-    width: 1200px;
-    background-color: white;
+    /* Updated for the new canvas size */
+    max-width: 1400px; 
+    /* The page is now just a container, so no background or shadow is needed */
     margin: auto;
-    padding: 50px;
-    padding-top: 35px;
+    padding: 0 40px; /* Padding for the sides */
     box-sizing: border-box;
+}
+
+
+.footer {
+    border-top: 1px solid #e9ecef;
+    padding-top: 30px;
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #6c757d;
+    text-align: center;
+}
+
+/* --- VISUALIZATION CARD LAYOUT --- */
+
+/* This is the new "card" style for each visualization section */
+.viz-row {
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 12px; /* Softer, more modern rounded corners */
+    padding: 40px; /* Generous padding inside the card */
+    margin-bottom: 40px; /* Space between each card */
+    
+    /* A subtle, professional shadow to lift the card off the page */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
+
+    /* Flex properties for alignment */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Optional: Add a subtle lift effect when hovering over a card */
+.viz-row:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .vis-container {
@@ -26,32 +133,37 @@ body {
     box-sizing: border-box;
 }
 
-.description h2,
-h1 {
-    margin-top: 0px;
-}
-
-.description-right {
-    padding-left: 20px;
+.description {
+    padding-right: 30px;
     box-sizing: border-box;
 }
 
-.description-left {
-    padding-right: 20px;
-    box-sizing: border-box;
+
+/* --- HIERARCHY & ALTERNATING LAYOUT --- */
+
+.callout {
+    background-color: #e9f5ff;
+    border-left: 4px solid #0077b6;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
 }
 
-.pure-g {
-    margin-bottom: 40px;
-    letter-spacing: normal;
+.callout p {
+    margin-bottom: 0;
 }
 
-/* Ensure proper column spacing */
-.pure-g [class*="pure-u"] {
-    box-sizing: border-box;
+.callout strong {
+    color: #023e8a;
+}
+
+/* Flips the order for the alternating "zig-zag" layout */
+.viz-row-alt {
+    flex-direction: row-reverse;
+}
+
+/* Adjusts padding for the reversed row's description */
+.viz-row-alt .description {
+    padding-left: 30px;
     padding-right: 0;
-}
-
-.small-font {
-    font-size: 14px;
 }
