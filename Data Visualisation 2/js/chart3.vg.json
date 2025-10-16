@@ -10,9 +10,17 @@
   "data": {
     "url": "https://raw.githubusercontent.com/KavinTrinh/3179/refs/heads/main/Data%20Visualisation%202/data/co2_gdp_bubble_chart_data.csv"
   },
+
+  "autosize": {
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": {"left": 5, "top": 5, "right": 5, "bottom": 5},
+ 
   "vconcat": [
     {
-      "width": 700, 
+      "width": "container",
       "height": 400,
       "transform": [
         {
@@ -95,8 +103,9 @@
       }
     },
     {
-      "width": 700,
+      "width": "container",
       "height": 80,
+      "padding": 20,
       "transform": [
         {
           "aggregate": [

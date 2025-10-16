@@ -104,12 +104,11 @@ a:hover {
 
 /* --- VISUALIZATION CARD LAYOUT --- */
 
-/* This is the new "card" style for each visualization section */
 .viz-row {
     background-color: #ffffff; /* White background for the card */
     border-radius: 12px; /* Softer, more modern rounded corners */
     padding: 40px; /* Generous padding inside the card */
-    margin-bottom: 40px; /* Space between each card */
+    margin-bottom: 20px; /* Space between each card */
     
     /* A subtle, professional shadow to lift the card off the page */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
@@ -121,7 +120,6 @@ a:hover {
     flex-wrap: wrap;
 }
 
-/* Optional: Add a subtle lift effect when hovering over a card */
 .viz-row:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -130,6 +128,12 @@ a:hover {
 .vis-container {
     width: 100%;
     box-sizing: border-box;
+    padding: 5px;
+    border-radius: 8px;        /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* A subtle shadow for a "lifting" effect */
+    margin-bottom: 30px;       /* Space between the two chart cards */
+    width: 100%;                /* Set a max width for larger screens */
+    overflow-x: auto;
 }
 
 .description {
@@ -156,12 +160,10 @@ a:hover {
     color: #023e8a;
 }
 
-/* Flips the order for the alternating "zig-zag" layout */
 .viz-row-alt {
     flex-direction: row-reverse;
 }
 
-/* Adjusts padding for the reversed row's description */
 .viz-row-alt .description {
     padding-left: 30px;
     padding-right: 0;

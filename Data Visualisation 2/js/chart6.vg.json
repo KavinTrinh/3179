@@ -19,7 +19,7 @@
   "hconcat": [
     {
       "title": "Renewable Energy",
-      "width": 400,
+      "width": 350,
       "transform": [
         {
           "joinaggregate": [
@@ -85,7 +85,7 @@
       }
     },
     {
-      "width": 60,
+      "width": 50,
       "transform": [
         {
           "aggregate": [{"op": "max", "field": "Generation_GWh", "as": "dummy"}],

@@ -9,7 +9,7 @@
     "color": "#333",
     "subtitleColor": "#666"
   },
-  "width": 750,
+  "width": "container",
   "height": 450,
   "params": [
     {
