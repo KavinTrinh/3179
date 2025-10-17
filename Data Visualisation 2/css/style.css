@@ -1,6 +1,6 @@
-/* --- UPDATED HEADER STYLE --- */
+/* ---HEADER--- */
 .header {
-    /* Layer 1: The subtle background image */
+
     background-image: 
         url('https://ceoworld.biz/wp-content/uploads/2023/10/Carbon-Dioxide.jpg'), /* Your chosen image URL */
         linear-gradient(135deg, #FF4500, #D22B2B); /* Your existing gradient */
@@ -8,7 +8,6 @@
     background-size: cover; /* Ensure both layers cover the area */
     background-position: center center; /* Center both backgrounds */
     
-    /* Key for elegance: Blend the image with the gradient */
     background-blend-mode: overlay; /* Or 'multiply', 'soft-light', 'luminosity' - experiment! */
 
     text-align: center;
@@ -18,7 +17,6 @@
     box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.1);
 }
 
-/* h1 and p.subtitle styles remain the same for white text and shadow */
 .header h1 {
     color: #ffffff;
     text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
@@ -32,10 +30,9 @@
 /* --- BASE & TYPOGRAPHY --- */
 
 body {
-    /* A subtle, clean background that makes the cards pop */
     background-color: #f8f9fa; 
     margin: 0;
-    padding: 40px 0; /* More vertical space */
+    padding: 40px 0;
     font-family: 'Open Sans', sans-serif;
     color: #343a40; 
 }
@@ -84,9 +81,7 @@ a:hover {
 /* --- MAIN PAGE & FOOTER --- */
 
 .page {
-    /* Updated for the new canvas size */
     max-width: 1400px; 
-    /* The page is now just a container, so no background or shadow is needed */
     margin: auto;
     padding: 0 40px; /* Padding for the sides */
     box-sizing: border-box;
@@ -105,12 +100,11 @@ a:hover {
 /* --- VISUALIZATION CARD LAYOUT --- */
 
 .viz-row {
-    background-color: #ffffff; /* White background for the card */
-    border-radius: 12px; /* Softer, more modern rounded corners */
-    padding: 40px; /* Generous padding inside the card */
-    margin-bottom: 20px; /* Space between each card */
-    
-    /* A subtle, professional shadow to lift the card off the page */
+    background-color: #ffffff; 
+    border-radius: 12px; 
+    padding: 40px; 
+    margin-bottom: 20px;
+
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
     transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth hover effect */
 
@@ -129,10 +123,10 @@ a:hover {
     width: 100%;
     box-sizing: border-box;
     padding: 5px;
-    border-radius: 8px;        /* Rounded corners */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* A subtle shadow for a "lifting" effect */
-    margin-bottom: 30px;       /* Space between the two chart cards */
-    width: 100%;                /* Set a max width for larger screens */
+    border-radius: 8px;        
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 30px;       
+    width: 100%;             
     overflow-x: auto;
 }
 
